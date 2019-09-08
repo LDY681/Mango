@@ -3,7 +3,7 @@ var tracking = require('./TrackApi.js');
 
   // NO ERROR CHECK!
   // response is a JSON object
-  function callback(response) {
+  function usps_callback(response) {
 
     // stringfy is as same as toString()
     console.log(JSON.stringify(response));
@@ -26,6 +26,22 @@ var tracking = require('./TrackApi.js');
   var usps_username = '328NOCOM1209';     // DO NOT CHANGE THIS
   var tracking_number = '9500115483499149486703';
 
-tracking.trackUSPS(usps_username, tracking_number, callback);
+//tracking.trackUSPS(usps_username, tracking_number, usps_callback);
+
+
+function ups_callback(response) {
+  // print toString()
+  console.log(JSON.stringify(response));
+}
+
+
+var ups_tracking_number = '1Z9YF1281326222692';
+
+// Do NOT change these vars 
+var accessKey = 'CD6B1F9260161CF5';
+var password = 'fuckUSPS!';
+var ups_username = 'wang3695';
+
+tracking.trackUPS(ups_username, password, accessKey, ups_tracking_number, ups_callback);
 
 
