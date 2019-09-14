@@ -17,4 +17,5 @@ Database: MySQL
 
 Testing Frameworks: Chai + Mocha
 
-
+Node.js  npm  Express are required to run this project
+check this page to install: https://developer.mozilla.org/zh-CN/docs/Learn/Server-side/Express_Nodejs/development_environment 
