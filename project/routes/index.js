@@ -18,18 +18,16 @@ function usps_callback(response) {
 }
 
 var myLogger = function (req, res, next) {
-  console.log('LOGGED')
   result = tool.showInfo()
   next()
 }
 
-//router.use(myLogger)
+router.use(myLogger)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //tracking.trackUSPS(usps_username, tracking_number, usps_callback)
-  //console.log(response.TrackResponse.TrackInfo[0].$);
-  //while (result == '00000');
+  // tracking.trackUSPS(usps_username, tracking_number, usps_callback)
+  // console.log(response.TrackResponse.TrackInfo[0].$);
   //res.render('index', { title: result });
 
   res.sendFile(path.join(__dirname, '../temp_front_files/index.html'))  

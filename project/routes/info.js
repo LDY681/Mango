@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  var response = {
+    "tracking number":req.query.tracking_num,
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
 });
 
 

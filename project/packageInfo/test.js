@@ -48,11 +48,7 @@ var ups_username = 'wang3695';
 
 
 function showInfo() {
-  console.log('works');
   tracking.trackUSPS(usps_username, tracking_number, usps_callback);
-  //console.log(trackingID)
-  //while (trackingID == '00000');
-  console.log(trackingID)
   return trackingID
 }
 
