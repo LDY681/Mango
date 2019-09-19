@@ -41,8 +41,6 @@ function sendRequest(path, callback) {
 			parser.parseString(str, function(err, result){
 				if (!err) {
 					if (result.TrackResponse) {
-						//console.log(result);
-						//return result
 						callback(result);
 					}
 				} else {
