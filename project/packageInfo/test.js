@@ -59,9 +59,9 @@ var ups_username = 'wang3695';
 
 
 
-function showInfo(id) {
-  tracking.trackUSPS(usps_username, id, usps_callback);
-  return res;
+function showInfo() {
+    console.log('showInfo');
+    tracking.trackUSPS(usps_username, tracking_number, usps_callback);
 }
 
 
