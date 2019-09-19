@@ -1,10 +1,98 @@
 <!-- This file is for test ONLY! -->
 <html>
+<head>
+	<style>
+	.center {
+		text-align: center;
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+	.trackingNum {
+		display: block;
+		resize: none;
+		height: 44px;
+		padding: 10px;
+		font-size: 16px;
+		border: solid 1px #336;
+		border-radius: 3px;
+		width: 100%;
+		color: #555;
+		background-color: #fff;
+		overflow: auto;
+		margin: 0;
+		line-height: 1.42857143;
+		background-image: none;
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	}
+	.trackbtn {
+		opacity: 1;
+		cursor: pointer;
+		display: block;
+		margin: 40px auto 20px;
+		width: 10%;
+		height: 44px;
+		color: #fff;
+		font-size: 18px;
+		font-weight: bold;
+		background: #336;
+		border-color: #336;
+		line-height: 44px;
+		border-radius: 3px;
+		padding: 0 20px;
+		text-decoration: none;
+		vertical-align: middle;
+		border: 0;
+		overflow: visible;
+	}
+	.wrapper {
+		width: 83%;
+		float: left;
+		position: relative;
+		min-height: 1px;
+		padding-left: 15px;
+		padding-right: 15px;
+		display: block;
+	}
+</style>
 <body>
-<form action="http://127.0.0.1:3000/info" method="GET">
- 
-Tracking number: <input type="text" name="tracking_num">
-<input type="submit" value="search">
-</form>
+	<form action="http://127.0.0.1:3000/info" method="GET">
+		<div class="center">
+			<div class="wrapper">
+				<textarea class="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
+			</div>
+			<button class="trackbtn" type="submit" id="track">Track</button>
+		</div>
+	</form>
 </body>
 </html>
+
+
+<!-- This file is for test ONLY! -->
+<!-- <html>
+<head>
+<style>
+.center {
+	text-align: center;
+}
+</style>
+<script>
+	function search(){
+		var id = document.getElementById("id").value;
+		id = 9500115483499149486703;
+		location.replace("http://127.0.0.1:3000/info?" + id);
+	}
+</script>
+</head>
+<body>
+		<div class="center">
+			<div>
+				Tracking number: <input type="text" name="tracking_num" id="id">
+			</div>
+			<button id="search" label="Search" style={{width: "90px", height:"40px", margin: "10px"}} onClick="search()">Search</button>
+		</div>
+
+</body>
+</html> -->
+
+<!-- <form action="http://127.0.0.1:3000/info" method="GET"> -->
+<!-- </form> -->

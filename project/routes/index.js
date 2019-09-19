@@ -6,31 +6,31 @@ var tool = require('../packageInfo/test.js');
 var path = require('path')
 
 
-var usps_username = '328NOCOM1209';     // DO NOT CHANGE THIS
+var usps_username = '328NOCOM1209';		// DO NOT CHANGE THIS
 var tracking_number = '9500115483499149486703';
 
 var result = 'exxx';
 
 function usps_callback(response) {
-  result = JSON.stringify(response);
-  //res.send(JSON.stringify(response));
-  //res.render('index', { title: 'www' });
+	result = JSON.stringify(response);
+	//res.send(JSON.stringify(response));
+	//res.render('index', { title: 'www' });
 }
 
 var myLogger = function (req, res, next) {
-  result = tool.showInfo()
-  next()
+	result = tool.showInfo()
+	next()
 }
 
-router.use(myLogger)
+// router.use(myLogger)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // tracking.trackUSPS(usps_username, tracking_number, usps_callback)
-  // console.log(response.TrackResponse.TrackInfo[0].$);
-  //res.render('index', { title: result });
+	// tracking.trackUSPS(usps_username, tracking_number, usps_callback)
+	// console.log(response.TrackResponse.TrackInfo[0].$);
+	//res.render('index', { title: result });
 
-  res.sendFile(path.join(__dirname, '../temp_front_files/index.html'))  
+	res.sendFile(path.join(__dirname, '../temp_front_files/index.html'))
 });
 
 module.exports = router;
