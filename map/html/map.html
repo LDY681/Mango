@@ -27,19 +27,19 @@
 <script>console.log("Jquery加载完毕")</script>
 
 <script>
-    /*** 高德地图*/
-    var Gaode = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
-    var Gaodimage = L.tileLayer.chinaProvider('Google.Satellite.Map', {maxZoom: 18,minZoom: 5});
+    /*** 谷歌地图*/
+    var googleNormal = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
+    var googleSat = L.tileLayer.chinaProvider('Google.Satellite.Map', {maxZoom: 18,minZoom: 5});
 
     var baseLayers = {
-        "Map": Gaode,
-        "Satellite": Gaodimage
+        "Map": googleNormal,
+        "Satellite": googleSat
     }
 
     var map = L.map("mapLayer", {
         center: [35.74874, 116.05408],
         zoom: 5,
-        layers: [Gaode],
+        layers: [googleNormal],
         zoomControl: false
     });
 
