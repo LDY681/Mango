@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title>转世三国-模拟三国人生</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/w3.css">
+  <link rel="stylesheet" href="../css/all.css">
+  <link rel="stylesheet" href="../css/my-style.css">
+  <link rel="icon" href="../img/logo.png"/>
+  <link href="../css/leaflet.css" rel="stylesheet" />
+
+  <!--加载leaflet地图js-->
+  <script src="../js/leaflet.js"></script>
+  <script src="../js/leaflet.ChineseTmsProviders.js"></script>
+</head>
+
+<body class="w3-animate-opacity">
+<!--正文内容-->
+  <div id="mapContainer" class="w3-rest w3-card-4" style="height: 100vh;">
+    <div id="mapLayer"></div>
+  </div>
+
+<!--Script加载顺序!!!!!-->
+<!--加载jquery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>console.log("Jquery加载完毕")</script>
+
+<script>
+    /*** 谷歌地图*/
+    var googleNormal = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
+    var googleSat = L.tileLayer.chinaProvider('Google.Satellite.Map', {maxZoom: 18,minZoom: 5});
+
+    var baseLayers = {
+        "Map": googleNormal,
+        "Satellite": googleSat
+    }
+
+    var map = L.map("mapLayer", {
+        center: [35.74874, 116.05408],
+        zoom: 5,
+        layers: [googleNormal],
+        zoomControl: false
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://zssanguo.com">转世三国</a>'}).addTo(map);
+
+    L.control.layers(baseLayers, null).addTo(map);
+    L.control.zoom({
+        zoomInTitle: '放大',
+        zoomOutTitle: '缩小'
+    }).addTo(map);
+    L.control.scale().addTo(map);
+
+    // 和平状态蜀国城池图标
+    var shuCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/shuCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 和平状态魏国城池图标
+    var weiCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/weiCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 和平状态吴国城池图标
+    var wuCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/wuCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 和平状态黄巾城池图标
+    var huangCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/huangCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var warCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/warCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 编号,城市名称,坐标,图片地址,描述内容,点击链接
+    var list = [
+        // 魏国城池 26座
+        [1,'襄平',[41.26955, 123.17596],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [2,'北平',[41.24271, 119.41589],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [3,'蓟',[40.04864, 117.39716],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [4,'南皮',[38.05674, 116.70502],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [5,'中山',[38.51594, 115.00488],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [6,'钜鹿',[37.63381, 114.93073],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [7,'甘陵',[36.84666, 115.71075],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [8,'邺',[36.59348, 114.49402],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [9,'晋阳',[37.90737, 112.56317],'','<p>	</p><span>所属国家：</span>','https://zssanguo.com'],
+        [10,'上党',[36.22544, 113.1015],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [11,'平原',[37.18439, 116.44135],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [12,'北海',[36.72788, 119.20029],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [13,'琅琊',[35.06148, 118.32275],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [14,'下邳',[33.94336, 118.02612],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [15,'广陵',[33.53224, 119.03687],'','<p></p><span>	所属国家：</span>','https://zssanguo.com'],
+        [16,'济北',[35.18279, 115.46631],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [17,'濮阳',[35.69299, 115.02686],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [18,'陈留',[34.67388, 114.53522],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [19,'小沛',[34.7371, 116.95633],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [20,'谯',[33.85217, 115.77942],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [21,'许昌',[34.03104, 113.82797],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [22,'汝南',[33.27658, 114.26605],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [23,'宛',[32.98102, 112.54395],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [24,'河内',[35.10418, 113.41873],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [25,'洛阳',[34.6366, 112.46292],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [26,'弘农',[34.52466, 110.89874],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+
+        // 蜀国城池  16座
+        [27,'长安',[34.34996, 108.94009],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [28,'安定',[35.33641, 107.36389],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [29,'天水',[34.8634, 105.66101],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [30,'武威',[37.93662, 102.62466],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [31,'金城',[36.0491, 103.83179],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [32,'武都',[33.74261, 105.76263],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [33,'汉中',[33.07773, 107.02881],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [34,'永安',[31.0191, 109.47464],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [35,'梓潼',[31.64403, 105.18311],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [36,'成都',[30.57645, 104.07349],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [37,'江州',[29.54957, 106.55365],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [38,'牂牁',[26.26633, 107.52869],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [39,'越巂',[27.87975, 102.26761],'','<p></p><span>所属国家： </span>','https://zssanguo.com'],
+        [40,'建宁',[25.48543, 103.79883],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [41,'永昌',[25.10923, 99.16122],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [42,'上庸',[32.23836, 110.2533],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        //吴国城池 18座
+
+        [43,'新野',[32.53176, 112.36679],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [44,'襄阳',[32.05464, 112.13882],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [45,'江夏',[31.02411, 113.75381],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [46,'江陵',[30.36103, 112.18964],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [47,'长沙',[29.4683, 113.45581],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [48,'武陵',[29.02976, 111.6925],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [49,'桂阳',[25.743, 112.73895],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [50,'零陵',[26.22445, 111.63208],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [51,'寿春',[32.58038, 116.79291],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [52,'庐江',[30.73593, 116.83685],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [53,'建业',[31.99876, 118.79517],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [54,'吴',[31.29967, 120.62164],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [55,'会稽',[29.99895, 120.58182],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [56,'豫章',[28.70022, 115.85083],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [57,'建安',[27.02457, 118.30593],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [58,'南海',[22.93848, 113.38852],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [59,'合浦',[21.68295, 109.23157],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+        [60,'交趾',[21.01273, 105.82855],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
+    ];
+
+    // 地图上显示城池
+    const battlehtml = "../html/city.html?id=";
+    // 因为mapID是从1开始的,list index是从0开始的,所以记得要减一
+    var query = new AV.Query('city');
+    query.include(['owner']);
+    query.find().then(function (cities) {
+        cities.forEach(function(city) {
+            if ( city.get("isAtWar") === false){
+                if (city.get('owner').get('name') === "weiguo"){
+                    $j = city.get('cityId');                                                                                                                       //编号+城市名+所属州郡+现在地址+战场链接
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }else if (city.get('owner').get('name') === "shuguo"){
+                    $j = city.get('cityId');
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }else if (city.get('owner').get('name') === "wuguo"){
+                    $j = city.get('cityId');
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }else{
+                    $j = city.get('cityId');
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }
+            }else{
+                $j = city.get('cityId');
+                L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+            }
+
+        });
+    });
+
+    //点击mapMenu显示popUp
+    function getMap(cityID) {
+        console.log("cityId是: "+ cityID);
+        var query = new AV.Query('city');
+        query.include(['owner']);
+        query.equalTo('cityId', cityID);
+        query.find().then(function(cities){
+            var city = cities[0];
+            console.log(city.get("name"));
+            $j=cityID-1;
+
+            if ( city.get("isAtWar") === false){
+                if (city.get('owner').get('name') === "weiguo"){
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }else if (city.get('owner').get('name') === "shuguo"){
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }else if (city.get('owner').get('name') === "wuguo"){
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }else{
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }
+            }else{
+                L.marker([list[$j][2][0],list[$j][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+            }
+        });
+    }
+
+    //弹窗
+    var popup = new L.popup();
+    function onMapClick(e) {
+        popup.setLatLng(e.latlng).setContent(e.latlng.toString()).openOn(map);
+    }
+    map.on('click', onMapClick);
+
+    if(top != self){
+        window.top.location.replace(self.location);
+    }
+</script>
+
+</body>
+</html>
