@@ -16,7 +16,7 @@ var tracking = require('./TrackApi.js');
     // print tracking number
 	console.log("tracking number\n");
     console.log(response.TrackResponse.TrackInfo[0].$);
-    trackingID = response.TrackResponse.TrackInfo[0].$
+    trackingID = response.TrackResponse.TrackInfo[0].$;
 
     // print summary
 	console.log("summary\n");
@@ -26,7 +26,7 @@ var tracking = require('./TrackApi.js');
     // print whole tracking histry TrackDetail is a list of tracking history
 	console.log("Track Detail\n");
     console.log(response.TrackResponse.TrackInfo[0].TrackDetail);
-	trackingHistory = response.TrackResponse.TrackInfo[0].TrackDetail
+	trackingHistory = response.TrackResponse.TrackInfo[0].TrackDetail;
 
     // print one tracking history
     // example: TrackDetail[0] prints first tracking history

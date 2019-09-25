@@ -3,7 +3,7 @@ var app = express();
 var router = express.Router();
 var tracking = require('../packageInfo/TrackApi.js');
 var tool = require('../packageInfo/test.js');
-var path = require('path')
+var path = require('path');
 
 
 var usps_username = '328NOCOM1209';		// DO NOT CHANGE THIS
@@ -18,9 +18,9 @@ function usps_callback(response) {
 }
 
 var myLogger = function (req, res, next) {
-	result = tool.showInfo()
+	result = tool.showInfo();
 	next()
-}
+};
 
 // router.use(myLogger)
 

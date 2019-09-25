@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var trackingAPI = require('../packageInfo/TrackApi.js');
 var tool = require('../packageInfo/test.js');
-var path = require('path')
+var path = require('path');
 
 var usps_username = '328NOCOM1209';     // DO NOT CHANGE THIS
 var tracking_number = '9500115483499149486703';
@@ -25,7 +25,7 @@ router.get('/',  async (req, res) => {
 	// sleep 1 second, wait untail package data is fetched 
 	await new Promise (resolve => {
 		setTimeout(resolve, 1000)
-	})
+	});
 
 	console.log(packageInfo.TrackResponse.TrackInfo[0].$);
 	res.end(JSON.stringify(packageInfo));
