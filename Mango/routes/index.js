@@ -33,4 +33,12 @@ router.get('/', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../temp_front_files/index.html'))
 });
 
+router.post('/', function(req, res, next){
+	var usps_username = req.body.usps_username;
+	var tracking_number = req.body.tracking_number;
+	console.log('usps_username: ', usps_username);
+	console.log('tracking_number: ', tracking_number);
+	console.log('body: ', req.body);
+});
+
 module.exports = router;
