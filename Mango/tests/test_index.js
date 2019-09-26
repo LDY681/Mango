@@ -30,7 +30,7 @@ it('Test 2: should return 200 with correct username and tracking number', functi
     done();
 });
 
-it('Test 3: should return 201 with missing username', function(done)
+it('Test 3: should return {missing} with missing username', function(done)
 {
     let data = {
         tracking_number: '9500115483499149486703'
@@ -43,7 +43,7 @@ it('Test 3: should return 201 with missing username', function(done)
         .expect(201)
         .expect(function (res)
         {
-            assert.equal(res.text, 201);
+            assert.equal(res.body.status, 201);
         })
         .end(done);
     done();
@@ -62,7 +62,7 @@ it('Test 4: should return 201 with missing tracking number', function(done)
         .expect(201)
         .expect(function (res)
         {
-            assert.equal(res.text, 201);
+            assert.equal(res.body.status, 201);
         })
         .end(done);
     done();

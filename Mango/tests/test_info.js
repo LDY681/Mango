@@ -1,5 +1,5 @@
 var request = require("supertest");
-var server = require("../app.js").listen(8000);
+var server = require("../app.js");
 var assert = require("assert");
 
 it('Test 1: check for response', function(done)
