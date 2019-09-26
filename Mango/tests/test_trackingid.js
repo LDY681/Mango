@@ -1,9 +1,18 @@
 var request = require("supertest");
 var server = require("../app.js").listen(8000);
 var assert = require("assert");
-//var trackingAPI = require('../packageInfo/TrackApi.js');
 
-it('should return 200 with correct tracking number', function(done)
+//const expect = require('chai').expect;
+
+it('Test 1: check for response', function(done)
+{
+    request(server)
+        .get("/")
+        .expect(200);
+        done();
+});
+
+it('Test 2: should return 200 with correct username and tracking number', function(done)
 {
     let data = {
         usps_username: '328NOCOM1209',
@@ -13,10 +22,12 @@ it('should return 200 with correct tracking number', function(done)
         .post("/")
         .send(data)
         .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
         .expect(200)
         .expect(function (res)
         {
             assert.equal(res.body.status, 200);
-        })
-        .end(done);
+        });
+        //.end(done);
+        done();
 });
