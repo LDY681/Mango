@@ -28,8 +28,8 @@ router.get('/',  async (req, res) => {
 	});
 
 	console.log(packageInfo.TrackResponse.TrackInfo[0].$);
-	res.end(JSON.stringify(packageInfo));
-	//res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
+	//res.end(JSON.stringify(packageInfo));
+	res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
 });
 
 module.exports = router;
