@@ -4,15 +4,15 @@
   <title>转世三国-模拟三国人生</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../css/w3.css">
-  <link rel="stylesheet" href="../css/all.css">
-  <link rel="stylesheet" href="../css/my-style.css">
+  <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/5ac9a4c21164cd7b99a5/w3.css">
+  <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/ee4f73354921274b648d/all.css">
+  <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/2592a6cc40178c8aa741/my-style.css">
   <link rel="icon" href="../img/logo.png"/>
-  <link href="../css/leaflet.css" rel="stylesheet" />
+  <link href="http://lc-q48bubuw.cn-e1.lcfile.com/2f5b856a8894265470d9/leaflet.css" rel="stylesheet" />
 
   <!--加载leaflet地图js-->
-  <script src="../js/leaflet.js"></script>
-  <script src="../js/leaflet.ChineseTmsProviders.js"></script>
+  <script src="http://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
+  <script src="http://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
 </head>
 
 <body class="w3-animate-opacity">
@@ -27,31 +27,26 @@
 <script>console.log("Jquery加载完毕")</script>
 
 <script>
-    /*** 谷歌地图*/
-    var googleNormal = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
-    var googleSat = L.tileLayer.chinaProvider('Google.Satellite.Map', {maxZoom: 18,minZoom: 5});
-
+    /*** 高德地图*/
+    var Gaode = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
+    var Gaodimage = L.tileLayer.chinaProvider('Google.Satellite.Map', {maxZoom: 18,minZoom: 5});
     var baseLayers = {
-        "Map": googleNormal,
-        "Satellite": googleSat
+        "Map": Gaode,
+        "Satellite": Gaodimage
     }
-
     var map = L.map("mapLayer", {
         center: [35.74874, 116.05408],
         zoom: 5,
-        layers: [googleNormal],
+        layers: [Gaode],
         zoomControl: false
     });
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://zssanguo.com">转世三国</a>'}).addTo(map);
-
     L.control.layers(baseLayers, null).addTo(map);
     L.control.zoom({
         zoomInTitle: '放大',
         zoomOutTitle: '缩小'
     }).addTo(map);
     L.control.scale().addTo(map);
-
     // 和平状态蜀国城池图标
     var shuCityIcon = L.icon({
         iconUrl: 'https://zssanguo.com/img/shuCityIcon.png',
@@ -59,7 +54,6 @@
         // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
-
     // 和平状态魏国城池图标
     var weiCityIcon = L.icon({
         iconUrl: 'https://zssanguo.com/img/weiCityIcon.png',
@@ -67,27 +61,23 @@
         // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
-
     // 和平状态吴国城池图标
     var wuCityIcon = L.icon({
         iconUrl: 'https://zssanguo.com/img/wuCityIcon.png',
         iconSize:     [48,48],    // size of the icon
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
-
     // 和平状态黄巾城池图标
     var huangCityIcon = L.icon({
         iconUrl: 'https://zssanguo.com/img/huangCityIcon.png',
         iconSize:     [48,48],    // size of the icon
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
-
     var warCityIcon = L.icon({
         iconUrl: 'https://zssanguo.com/img/warCityIcon.png',
         iconSize:     [48,48],    // size of the icon
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
-
     // 编号,城市名称,坐标,图片地址,描述内容,点击链接
     var list = [
         // 魏国城池 26座
@@ -117,7 +107,6 @@
         [24,'河内',[35.10418, 113.41873],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [25,'洛阳',[34.6366, 112.46292],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [26,'弘农',[34.52466, 110.89874],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
-
         // 蜀国城池  16座
         [27,'长安',[34.34996, 108.94009],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [28,'安定',[35.33641, 107.36389],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
@@ -136,7 +125,6 @@
         [41,'永昌',[25.10923, 99.16122],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [42,'上庸',[32.23836, 110.2533],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         //吴国城池 18座
-
         [43,'新野',[32.53176, 112.36679],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [44,'襄阳',[32.05464, 112.13882],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [45,'江夏',[31.02411, 113.75381],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
@@ -156,7 +144,6 @@
         [59,'合浦',[21.68295, 109.23157],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
         [60,'交趾',[21.01273, 105.82855],'','<p></p><span>所属国家：</span>','https://zssanguo.com'],
     ];
-
     // 地图上显示城池
     const battlehtml = "../html/city.html?id=";
     // 因为mapID是从1开始的,list index是从0开始的,所以记得要减一
@@ -182,10 +169,8 @@
                 $j = city.get('cityId');
                 L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
             }
-
         });
     });
-
     //点击mapMenu显示popUp
     function getMap(cityID) {
         console.log("cityId是: "+ cityID);
@@ -196,7 +181,6 @@
             var city = cities[0];
             console.log(city.get("name"));
             $j=cityID-1;
-
             if ( city.get("isAtWar") === false){
                 if (city.get('owner').get('name') === "weiguo"){
                     L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
@@ -212,14 +196,12 @@
             }
         });
     }
-
     //弹窗
     var popup = new L.popup();
     function onMapClick(e) {
         popup.setLatLng(e.latlng).setContent(e.latlng.toString()).openOn(map);
     }
     map.on('click', onMapClick);
-
     if(top != self){
         window.top.location.replace(self.location);
     }
