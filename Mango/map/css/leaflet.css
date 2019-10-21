@@ -278,12 +278,12 @@
     border-radius: 5px;
 }
 .leaflet-control-layers-toggle {
-    background-image: url(../img/layers.png);
+    background-image: url("https://avos-cloud-gwibfiplqh86.s3.amazonaws.com/c3854554fa40c4e59745/layers.png");
     width: 36px;
     height: 36px;
 }
 .leaflet-retina .leaflet-control-layers-toggle {
-    background-image: url(../img/layers-2x.png);
+    background-image: url("https://avos-cloud-gwibfiplqh86.s3.amazonaws.com/538cfb51d23b2f2b93bb/layers-2x.png");
     background-size: 26px 26px;
 }
 .leaflet-touch .leaflet-control-layers-toggle {
