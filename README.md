@@ -26,3 +26,8 @@ you should be able to see the website on localhost:3000
 
 https://cryptic-woodland-23147.herokuapp.com
 
+
+Using Heroku test locally: changing port number from 3000 to 5000 first
+then type heroku local  
+localhost:5000
+
