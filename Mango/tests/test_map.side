@@ -1,0 +1,436 @@
+{
+  "id": "7685f07c-8632-4990-9ef3-904138e7d9de",
+  "version": "2.0",
+  "name": "mapTest",
+  "url": "http://localhost:3000/map",
+  "tests": [{
+    "id": "531cba65-eb30-4645-a4e9-ac1e663de276",
+    "name": "Open Map Page",
+    "commands": [{
+      "id": "72fc31bb-73a1-4692-b79b-5aab0d2d60e3",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ccc18dcf-0834-4a20-a1ff-d79e6204162a",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "a2493352-a09d-4d98-be8a-3e265bedb67c",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "d4cb3ab6-ec8a-40e9-8e8d-bf992ccdfc1b",
+    "name": "Click On Location Marker",
+    "commands": [{
+      "id": "5400bf51-b7f0-4acd-a9c5-d636811457af",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d71e081b-57b8-4ac4-a998-ba58da7de9ab",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "bf33814b-4c2a-448f-a8cc-eadfc7a87eed",
+      "comment": "",
+      "command": "clickAt",
+      "target": "css=.leaflet-marker-icon:nth-child(1)",
+      "targets": [
+        ["css=.leaflet-marker-icon:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'http://www.myiconfinder.com/uploads/iconsets/256-256-76f453c62108782f0cad9bfc2da1ae9d.png')]", "xpath:img"],
+        ["xpath=//div[@id='mapLayer']/div/div[2]/div[3]/img", "xpath:idRelative"],
+        ["xpath=//div[3]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3023d96-ebdb-4c06-975a-429f3d72f46a",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "500e2b0d-f8f2-4e0e-96bb-dc912339885e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "a62af0d3-e1ed-471f-952d-fd253cf00cc3",
+    "name": "layer control-satellite",
+    "commands": [{
+      "id": "5b19fec6-16c2-48e0-937c-602cb5adbcce",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b59d7bf4-2e0a-486c-9b5b-a9a1bc76668c",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "5181341d-bad6-4d04-a362-d16086e1686e",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.leaflet-control-layers",
+      "targets": [
+        ["css=.leaflet-control-layers", "css:finder"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div[2]/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c438734e-9ad3-4ea5-81ea-dd4920f9554f",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "e1023b6c-c470-4221-bc96-ddb5bdefde26",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(2) > span",
+      "targets": [
+        ["css=label:nth-child(2) > span", "css:finder"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div[2]/div/form/div/label[2]/span", "xpath:idRelative"],
+        ["xpath=//label[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,' Satellite')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f09a60dc-31b6-4a9c-8d8a-b10a15bf3286",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "add3a9fd-40e8-407e-8f3d-c4142f832ee5",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "b7db6253-880a-46ac-82a1-51a2c4e39800",
+    "name": "Click On Location Marker & Click To Info Page",
+    "commands": [{
+      "id": "56c31a65-d9b2-4727-8aad-70dbf3c2f5b8",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "85167ff8-5f7c-4c4a-a71b-81786c54e65d",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "a9062821-f91e-453d-97c2-8742771ab425",
+      "comment": "",
+      "command": "clickAt",
+      "target": "css=.leaflet-marker-icon:nth-child(1)",
+      "targets": [
+        ["css=.leaflet-marker-icon:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'http://www.myiconfinder.com/uploads/iconsets/256-256-76f453c62108782f0cad9bfc2da1ae9d.png')]", "xpath:img"],
+        ["xpath=//div[@id='mapLayer']/div/div[2]/div[3]/img", "xpath:idRelative"],
+        ["xpath=//div[3]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2c32418-988e-426a-b909-89e95109dd80",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "98392a66-8812-45e7-b50a-2d0a12f50cea",
+      "comment": "",
+      "command": "clickAt",
+      "target": "linkText=To Info Page",
+      "targets": [
+        ["linkText=To Info Page", "linkText"],
+        ["css=a:nth-child(8)", "css:finder"],
+        ["xpath=//a[contains(text(),'To Info Page')]", "xpath:link"],
+        ["xpath=//div[@id='mapLayer']/div/div[2]/div[4]/div/div/div/div/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://localhost:3000/info']", "xpath:href"],
+        ["xpath=//div[4]/div/div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'To Info Page')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "31717c32-9155-47c3-bfa8-491cbec33f54",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "808feba9-c6b5-4540-8ad6-5b7c22faef81",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "c06c1c8d-0c55-4fac-af40-558f9f6f9b8c",
+    "name": "layer control-normal",
+    "commands": [{
+      "id": "942ad040-95dd-4fbd-a77f-ecf5ee4822e5",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e622ff67-d04f-48e1-92da-ae736d7c9e5a",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "e4b4722e-0790-4b13-b3fa-ec40c5c13844",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.leaflet-control-layers",
+      "targets": [
+        ["css=.leaflet-control-layers", "css:finder"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div[2]/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "36e7f2e2-052c-40ea-a0b2-2a041b5a99af",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "490509ea-371d-43e3-9c3a-c78cb938cf39",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(2) > span",
+      "targets": [
+        ["css=label:nth-child(2) > span", "css:finder"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div[2]/div/form/div/label[2]/span", "xpath:idRelative"],
+        ["xpath=//label[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,' Satellite')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af4336be-0502-45cb-9d68-6ced7bbadd97",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "b77e872e-c28a-4c02-8159-02393d4df18a",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(1) > span",
+      "targets": [
+        ["css=label:nth-child(2) > span", "css:finder"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div[2]/div/form/div/label[2]/span", "xpath:idRelative"],
+        ["xpath=//label[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,' Satellite')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5387cab-4fb9-49f5-8dde-f6aa10b4171a",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "fd29fa96-f248-43bd-8f97-109edcc7d3de",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "374bb34b-0bc6-419e-83d0-fe834b8cd98e",
+    "name": "zoom control-zoom in",
+    "commands": [{
+      "id": "d615f389-4567-499f-a978-6d60ec7d0eaa",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "13ec649e-4b1d-4fe5-9de9-50140d912fcf",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "17e7bdae-f4fc-4c66-b16e-c579df678425",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=+",
+      "targets": [
+        ["linkText=+", "linkText"],
+        ["css=.leaflet-control-zoom-in", "css:finder"],
+        ["xpath=//a[contains(text(),'+')]", "xpath:link"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "60de16e8-16cb-4cf1-a9dd-1108efacbb54",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "4377dfb1-af68-4683-bde0-968f133af5c1",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "829f229a-ba6c-4672-9b0e-121e49974341",
+    "name": "zoom control-zoom out",
+    "commands": [{
+      "id": "df9ac4a8-5637-4b8f-9cdf-4577d25de2e3",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ea0fd7c3-c794-4219-8b37-f89771f9cecf",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "f29c99d5-e414-4f70-9ae9-e5f40f4481d2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=-",
+      "targets": [
+        ["linkText=+", "linkText"],
+        ["css=.leaflet-control-zoom-in", "css:finder"],
+        ["xpath=//a[contains(text(),'+')]", "xpath:link"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "74b1acea-1a52-46d3-8a20-a46fe5227e84",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "dd324dd1-99f7-4483-9bd3-35b44c66518b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "6286c7cd-26b7-43c9-86b1-3de2cab7cb9e",
+    "name": "Click On attribute Back to Info",
+    "commands": [{
+      "id": "11492a97-42d3-4e9b-9715-15ef7f214aa6",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/map",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d8d32587-9fd8-4e9e-b50e-a6cf12ce7dc8",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "798ec625-bbc9-499b-ac74-e848a4283367",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Back to Info Page",
+      "targets": [
+        ["linkText=Back to Info Page", "linkText"],
+        ["css=.leaflet-control-attribution > a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Back to Info Page')]", "xpath:link"],
+        ["xpath=//div[@id='mapLayer']/div[2]/div[4]/div/a[2]", "xpath:idRelative"],
+        ["xpath=//a[@href='http://localhost:3000/info']", "xpath:href"],
+        ["xpath=//div[4]/div/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Back to Info Page')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "278bc98f-27f0-4d68-8475-96ee7de02a8b",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "0bdd6df7-f5aa-4d3a-ba1d-669185481201",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a960bf19-56ba-4364-ba44-d4b2c19f9d27",
+    "name": "mapTest",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d4cb3ab6-ec8a-40e9-8e8d-bf992ccdfc1b", "b7db6253-880a-46ac-82a1-51a2c4e39800", "6286c7cd-26b7-43c9-86b1-3de2cab7cb9e", "531cba65-eb30-4645-a4e9-ac1e663de276", "c06c1c8d-0c55-4fac-af40-558f9f6f9b8c", "a62af0d3-e1ed-471f-952d-fd253cf00cc3", "374bb34b-0bc6-419e-83d0-fe834b8cd98e", "829f229a-ba6c-4672-9b0e-121e49974341"]
+  }],
+  "urls": ["http://localhost:3000/map"],
+  "plugins": []
+}
