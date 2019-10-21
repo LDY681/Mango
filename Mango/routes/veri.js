@@ -7,7 +7,15 @@ router.post('/', function(req, res, next) {
     var err_message = "";
 
     var id_vali = 1;
-    if(tracking_number.length < 20){
+    if (tracking_number.length <= 0) {
+        id_vali = -1;
+        err_message = "(invalid) no tracking number";
+    }
+    else if(tracking_number.match(' ')){
+        id_vali = -1;
+        err_message = "(invalid) tracking number is null";
+    }
+    else if(tracking_number.length > 0 && tracking_number.length < 20){
         id_vali = -1;
         err_message = "(invalid) tracking number length < 20";
     }
@@ -18,7 +26,7 @@ router.post('/', function(req, res, next) {
     else if (tracking_number.match(/[a-z]/)){
         if(tracking_number.match(/^[a-z]+$/)){
             id_vali = -1;
-            err_message = "(invalid) tracking number only has lowercase letters";
+            err_message = "(invalid) tracking number is all lowercase letters";
         }
         else{
             id_vali = -1;
@@ -28,7 +36,7 @@ router.post('/', function(req, res, next) {
     else if(tracking_number.match(/[A-Z]/)){
         if(tracking_number.match(/^[A-Z]+$/)){
             id_vali = -1;
-            err_message = "(invalid) tracking number only has uppercase letters";
+            err_message = "(invalid) tracking number is all uppercase letters";
         }
         else{
             id_vali = -1;
@@ -38,17 +46,18 @@ router.post('/', function(req, res, next) {
     else if(tracking_number.match(/[?=.*?[#?!@$%^&*-]/)){
         if(tracking_number.match(/^[?=.*?[#?!@$%^&*-]+$/)){
             id_vali = -1;
-            err_message = "(invalid) tracking number only has uppercase letters";
+            err_message = "(invalid) tracking number is all special characters";
         }
         else{
             id_vali = -1;
             err_message = "(invalid) tracking number has special characters";
         }
     }
-    else if (!tracking_number.match(/^[0-9]+$/)) {
+    else if (!(tracking_number.match(/^[0-9]+$/))) {
         id_vali = -1;
         err_message = "(invalid) tracking number does not have numbers";
     }
+
 
 
     if (id_vali === -1){
