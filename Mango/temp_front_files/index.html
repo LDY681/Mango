@@ -64,7 +64,7 @@
         console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
         var data = { trackNum: trackID };
         console.log("json to be sent: " + JSON.stringify(data));
-        fetch("http://localhost:3000/track",{
+        fetch("/track",{
             method: 'POST',
             mode: 'no-cors',
             headers: {
