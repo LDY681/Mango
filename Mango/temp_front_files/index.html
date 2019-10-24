@@ -57,12 +57,35 @@
 </style>
 <body>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    function postTrackingNum() {
+        var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
+        console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
+        var data = { trackNum: trackID };
+        console.log("json to be sent: " + JSON.stringify(data));
+        fetch("/track",{
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response =>response.text()).then(function(body){
+            //var trackInfo =  text ? JSON.parse(text) : {};
+            console.log(body);
+            //localStorage.setItem('trackInfo', body);
+        });
+    }
+</script>
+
+
 	<form action="/info" method="GET">
 		<div class="center">
 			<div class="wrapper">
-				<textarea class="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
+				<textarea class="trackingNum" id="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
 			</div>
-			<button class="trackbtn" type="submit" id="track">Track</button>
+			<button class="trackbtn" type="submit" id="track" onclick="postTrackingNum()">Track</button>
 		</div>
 	</form>
 </body>
