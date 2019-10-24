@@ -35,7 +35,7 @@
         layers: [Gaode],
         zoomControl: false
     });
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="http://localhost:3000/info">Back to Info Page</a> <<<'}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="/info">Back to Info Page</a> <<<'}).addTo(map);
     L.control.layers(baseLayers, null).addTo(map);
     L.control.zoom({
         zoomInTitle: '放大',
@@ -52,13 +52,13 @@
 
     // checkpoint list
     var list = [
-        [1,'Chicago Ohare Airport',[41.9741665,-87.9095101],'','<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: Departed USPS Facility</p><p>Address: WEST LAFAYETTE, IN 47906</p>','https://localhost:3000/info'],
-        [2,'Purdue Memorial Union',[40.4247276,-86.9127419],'','<p></p><p>Date: June 3, 2019, 6:54 am</p><p>Status: Arrived at Post Office</p><p>Address: LAFAYETTE, IN 47901</p>','https://localhost:3000/info'],
-        [3,'Indianapolis International Airport',[39.7168593,-86.2977839],'','<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>','https://localhost:3000/info'],
+        [1,'Chicago Ohare Airport',[41.9741665,-87.9095101],'','<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: Departed USPS Facility</p><p>Address: WEST LAFAYETTE, IN 47906</p>','/info'],
+        [2,'Purdue Memorial Union',[40.4247276,-86.9127419],'','<p></p><p>Date: June 3, 2019, 6:54 am</p><p>Status: Arrived at Post Office</p><p>Address: LAFAYETTE, IN 47901</p>','/info'],
+        [3,'Indianapolis International Airport',[39.7168593,-86.2977839],'','<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>','/info'],
     ];
 
     // Add location marker
-    const infoHTML = "http://localhost:3000/info";
+    const infoHTML = "/info";
     var i;
     for (i = 0; i < list.length; i++){
         L.marker([list[i][2][0],list[i][2][1]],{icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[i][0] + ". " + list[i][1] + "</font></h3>"+ list[i][4]  + "<br><br>" + "<a  href='"+ infoHTML  + "' target=_blank>" +"To Info Page"+"</a></div>");
