@@ -36,7 +36,7 @@ router.post('/track', function(req, res){
     console.log("json received: \n");
     console.log(req.body);
     //使用tracking_Num，通过tracking api求出tracking Info，然后将trackingInfo填进res.json里
-    res.json({ "usps_username": "liudayu","tracking_number": "test123"});
+    res.json({ "usps_username": "liudayu","tracking_number": req.body.trackNum});
 });
 
 router.post('/', function(req, res, next){
