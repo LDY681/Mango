@@ -29,6 +29,10 @@ app.use('/veri', idRouter);
 app.use('/signup', sign_up);
 app.use('/map', map);
 
+//bodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));

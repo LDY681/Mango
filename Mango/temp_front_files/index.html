@@ -62,14 +62,18 @@
     function postTrackingNum() {
         var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
         console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
-        var data = { trackNum: trackID };
+        var data = { 'trackNum': trackID };
         console.log("json to be sent: " + JSON.stringify(data));
         fetch("/track",{
             method: 'POST',
-            //mode: 'no-cors',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
+            redirect: 'follow',
+            referrer: 'no-referrer',
             body: JSON.stringify(data)
         }).then(response =>response.text()).then(function(body){
             //var trackInfo =  text ? JSON.parse(text) : {};
