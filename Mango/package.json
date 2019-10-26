@@ -8,6 +8,7 @@
     "test": "mocha ./tests/*.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chromedriver": "^77.0.0",

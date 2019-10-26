@@ -5,8 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressLayouts = require("express-ejs-layouts");
+const flash = require("connect-flash");
+const session = require("express-session");
 const mongoose = require("mongoose");
-const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/test?retryWrites=true&w=majority";
+const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/login-test?retryWrites=true&w=majority";
 
 
 var app = express();
@@ -27,6 +29,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// express session middle ware
+app.use(
+    // value of secret doesn't matter
+    session({
+      secret: 'Hidetaka_Miyazaki',
+      resave: true,
+      saveUninitialized: true
+    })
+  );
+
+// connect Flash
+app.use(flash());
+
+//Global Vars, assign vars to msgs
+app.use( (req, res, next) => {
+    res.locals.success_msg = req.flash("success_msg");
+    res.locals.error_msg = req.flash("error_msg");
+    res.locals.error = req.flash('error');
+    next();
+});
 
 // EJS
 app.use(expressLayouts);

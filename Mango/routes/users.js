@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
+
+// User model
+const User = require("../models/User");
 
 // login
 router.get('/login', (req, res) => res.render("login"));
@@ -33,6 +37,7 @@ router.post('/register', (req, res) => {
         errors.push({ msg: 'Please enters same password' });
     }
 
+    // if no errors
     if (errors.length > 0) {
         res.render('register', {
             errors,
@@ -42,8 +47,42 @@ router.post('/register', (req, res) => {
             password2
         });
     } else {
-        console.log(req.body);
-        res.send("hello");
+        User.findOne({ email: email })  // check email
+            .then(user => {
+                if(user) {
+                    // email has been used
+                    errors.push({ msg: 'Email is already registered' });
+                    res.render('register', {
+                        errors,
+                        name,
+                        email,
+                        password,
+                        password2
+                    });
+                } else {
+                    const newUser = new User({
+                        name,
+                        email,
+                        password
+                    });
+
+                    // Hash password
+                    bcrypt.genSalt(10, (err, salt) => 
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if (err) throw err;
+                            // update password to hashed password
+                            newUser.password = hash;
+
+                            //save data
+                            newUser.save()
+                                .then(user => {
+                                    req.flash("success_msg", "You are now registered and can login.");
+                                    res.redirect('/users/login');
+                                })
+                                .catch(err => console.log(err));
+                        }));
+                }
+            });
     }
 });
 
