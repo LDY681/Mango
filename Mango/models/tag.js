@@ -5,4 +5,4 @@ const tagSchema = mongoose.Schema({
   username: {type: String},
 })
 
-module.exports = mongoose.model("tag", tagSchema, 'tag);
+module.exports = mongoose.model("tag", tagSchema, 'tag');
