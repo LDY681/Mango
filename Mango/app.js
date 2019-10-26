@@ -8,10 +8,14 @@ const expressLayouts = require("express-ejs-layouts");
 const flash = require("connect-flash");
 const session = require("express-session");
 const mongoose = require("mongoose");
+const passport = require("passport");
 const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/login-test?retryWrites=true&w=majority";
 
 
 var app = express();
+
+// passport config
+require("./config/passport")(passport);
 
 // Database
 mongoose.set('useCreateIndex', true);
@@ -42,6 +46,10 @@ app.use(
 
 // connect Flash
 app.use(flash());
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Global Vars, assign vars to msgs
 app.use( (req, res, next) => {
