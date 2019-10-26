@@ -4,6 +4,7 @@ var router = express.Router();
 var tracking = require('../packageInfo/TrackApi.js');
 var tool = require('../packageInfo/test.js');
 var path = require('path');
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 var usps_username = '328NOCOM1209';		// DO NOT CHANGE THIS
 var tracking_number = '9500115483499149486703';
@@ -24,7 +25,8 @@ var myLogger = function (req, res, next) {
 // router.use(myLogger)
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',  function(req, res, next) {
+//router.get('/', ensureAuthenticated, function(req, res, next) {
 	// tracking.trackUSPS(usps_username, tracking_number, usps_callback)
 	// console.log(response.TrackResponse.TrackInfo[0].$);
 	//res.render('index', { title: result });
