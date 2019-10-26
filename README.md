@@ -22,6 +22,8 @@ check this page to install: https://developer.mozilla.org/zh-CN/docs/Learn/Serve
 
 change your path under /Mango and then run DEBUG=project* npm start 
 
+develop mode: enter Mango, run: "npm run dev"
+
 you should be able to see the website on localhost:3000
 
 https://cryptic-woodland-23147.herokuapp.com
