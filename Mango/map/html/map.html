@@ -35,7 +35,7 @@
         layers: [Gaode],
         zoomControl: false
     });
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="/info">Back to Info Page</a> <<<'}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="https://www.google.com" target="_blank">Back to Info Page</a> <<<'}).addTo(map);
     L.control.layers(baseLayers, null).addTo(map);
     L.control.zoom({
         zoomInTitle: '放大',
@@ -45,8 +45,8 @@
 
     // Location Marker Icon
     var defaultMarker = L.icon({
-        iconUrl: 'https://avos-cloud-gwibfiplqh86.s3.amazonaws.com/7a81633562abafcb5c02/location.png',
-        iconSize:     [48,48],    // size of the icon
+        iconUrl: 'https://avos-cloud-gwibfiplqh86.s3.amazonaws.com/7a81633562abafcb5c02/location.ppppng',
+        iconSize:     [-48,-48],    // size of the icon
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
 
@@ -58,10 +58,10 @@
     ];
 
     // Add location marker
-    const infoHTML = "/info";
+    const infoHTML = "https://www.google.com";
     var i;
     for (i = 0; i < list.length; i++){
-        L.marker([list[i][2][0],list[i][2][1]],{icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[i][0] + ". " + list[i][1] + "</font></h3>"+ list[i][4]  + "<br><br>" + "<a  href='"+ infoHTML  + "' target=_blank>" +"To Info Page"+"</a></div>");
+        L.marker([list[i][2][0],list[i][2][1]],{icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[i][0] + ". " + list[i][1] + "</font></h3>"+ list[i][4]  + "<br><br>" + "<a  href='"+ infoHTML  + "'>" +"To Info Page"+"</a></div>");
     }
 
     //popUp
@@ -83,7 +83,7 @@
             20
         ],
         "color": "#0000FF",
-        "weight": 8,
+        "weight": 0,
     }).addTo(map);
     map.fitBounds(polyline.getBounds());
 
