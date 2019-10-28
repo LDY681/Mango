@@ -8,21 +8,23 @@
   <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/ee4f73354921274b648d/all.css">
   <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/3f3571c72851519fdcd9/my-style.css">
   <link href="http://lc-q48bubuw.cn-e1.lcfile.com/7e8cc9e6890199a21d38/leaflet.css" rel="stylesheet" />
-
-  <!--加载leaflet地图js-->
-  <script src="http://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
-  <script src="http://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
 </head>
 
 <body class="w3-animate-opacity">
-<!--正文内容-->
-  <div id="mapContainer" class="w3-rest w3-card-4" style="height: 100vh;">
-    <div id="mapLayer"></div>
-  </div>
+<!--Map Container-->
+<div id="mapContainer" class="w3-rest w3-card-4" style="height: 100vh;">
+  <div id="mapLayer"></div>
+</div>
 
-<!--Script加载顺序!!!!!-->
-<!--加载jquery-->
+<!--Load scripts-->
+<!--jquery-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<!--leaflet js-->
+<script src="http://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
+<script src="http://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
+<!--google map api-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQkYx_TukGzO-NRhm-bGswFLA4woS8FgU&callback=initGeocode"></script>
+<!--leaflet map implementation-->
 <script>
     var Gaode = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
     var Gaodimage = L.tileLayer.chinaProvider('Google.Satellite.Map', {maxZoom: 18,minZoom: 5});
@@ -35,59 +37,94 @@
         layers: [Gaode],
         zoomControl: false
     });
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="https://www.google.com" target="_blank">Back to Info Page</a> <<<'}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="https://www.google.com">Back to Info Page</a> <<<'}).addTo(map);
     L.control.layers(baseLayers, null).addTo(map);
     L.control.zoom({
-        zoomInTitle: '放大',
-        zoomOutTitle: '缩小'
+        zoomInTitle: 'Zoom in',
+        zoomOutTitle: 'Zoom out'
     }).addTo(map);
     L.control.scale().addTo(map);
-
     // Location Marker Icon
     var defaultMarker = L.icon({
-        iconUrl: 'https://avos-cloud-gwibfiplqh86.s3.amazonaws.com/7a81633562abafcb5c02/location.ppppng',
+        iconUrl: 'https://avos-cloud-gwibfiplqh86.s3.amazonaws.com/7a81633562abafcb5c02/location.pppppppng',
         iconSize:     [-48,-48],    // size of the icon
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
-
-    // checkpoint list
-    var list = [
-        [1,'Chicago Ohare Airport',[41.9741665,-87.9095101],'','<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: Departed USPS Facility</p><p>Address: WEST LAFAYETTE, IN 47906</p>','/info'],
-        [2,'Purdue Memorial Union',[40.4247276,-86.9127419],'','<p></p><p>Date: June 3, 2019, 6:54 am</p><p>Status: Arrived at Post Office</p><p>Address: LAFAYETTE, IN 47901</p>','/info'],
-        [3,'Indianapolis International Airport',[39.7168593,-86.2977839],'','<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>','/info'],
-    ];
-
-    // Add location marker
-    const infoHTML = "https://www.google.com";
-    var i;
-    for (i = 0; i < list.length; i++){
-        L.marker([list[i][2][0],list[i][2][1]],{icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[i][0] + ". " + list[i][1] + "</font></h3>"+ list[i][4]  + "<br><br>" + "<a  href='"+ infoHTML  + "'>" +"To Info Page"+"</a></div>");
+    function compileList() {
+        // TODO： fake some more data
+        list.push([2, 'West Lafayette, IN 47906', [40.4259, -86.9081], '', '<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: In transit</p><p>Address: WEST LAFAYETTE, IN 47906</p>', '/info']);
+        list.push([3, 'Indianapolis International Airport', [39.7168593, -86.2977839], '', '<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>', '/info']);
+        console.log("now list looks like this");
+        console.log(list);
+        // Add location marker
+        const infoHTML = "https://www.google.com";
+        var i;
+        for (i = 0; i < list.length; i++) {
+            L.marker([list[i][2][0], list[i][2][1]], {icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" + list[i][0] + ". " + list[i][1] + "</font></h3>" + list[i][4] + "<br><br>" + "<a  href='" + infoHTML + "' target=_blank>" + "To Info Page" + "</a></div>");
+            console.log("marker " + i + " added");
+        }
+        //now compile polyline
+        compilePolyLine();
     }
-
     //popUp
     var popup = new L.popup();
     if(top != self){
         window.top.location.replace(self.location);
     }
-
-    //Add Path
-    var latLags = [];
-    for (i = 0; i < list.length; i++){
-        var x = list[i][2][0];
-        var y = list[i][2][1];
-        latLags.push([x,y]);
+    function compilePolyLine(){
+        //Add Path
+        var latLags = [];
+        for (i = 0; i < list.length; i++){
+            var x = list[i][2][0];
+            var y = list[i][2][1];
+            latLags.push([x,y]);
+        }
+        console.log("latLags looks like this: " );
+        console.log(latLags);
+        var polyline = L.polyline(latLags, {
+            "dashArray": [
+                10,
+                20
+            ],
+            "color": "#0000FF",
+            "weight": -8,
+        }).addTo(map);
+        map.fitBounds(polyline.getBounds());
     }
-    var polyline = L.polyline(latLags, {
-        "dashArray": [
-            10,
-            20
-        ],
-        "color": "#0000FF",
-        "weight": 0,
-    }).addTo(map);
-    map.fitBounds(polyline.getBounds());
 
 </script>
-
+<!--google geocode implementaion-->
+<script>
+    var list= []; //address info list, global
+    function initGeocode() {
+        console.log("initGeocode");
+        //TODO: backend send data to here
+        var info =
+            {
+                "address": "Chicago Ohare Airport",
+                "date": "October 28th, 2019",
+                "status": "Status: Departed USPS Facility"
+            };
+        var geoCoder = new google.maps.Geocoder();
+        geocodeAddress(geoCoder, info);
+    }
+    function geocodeAddress(geoCoder, info) {
+        var address = info.address;
+        var date = info.date;
+        var status = info.status;
+        geoCoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                var lat = results[0].geometry.location.lat();
+                var lng = results[0].geometry.location.lng();
+                console.log(lat, lng);
+                list.push([list.length+1, address, [lat, lng],'','<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: Departed USPS Facility</p><p>Address: WEST LAFAYETTE, IN 47906</p>','/info']);
+                //call leaflet function after geocode is completed
+                compileList();
+            } else {
+                alert('Geocode returns error: ' + status);
+            }
+        });
+    }
+</script>
 </body>
 </html>
