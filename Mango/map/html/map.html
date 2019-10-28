@@ -37,11 +37,9 @@
         layers: [Gaode],
         zoomControl: false
     });
-<<<<<<< Updated upstream
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="/info">Back to Info Page</a> <<<'}).addTo(map);
-=======
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="/info" target="_blank">Back to Info Page</a> <<<'}).addTo(map);
->>>>>>> Stashed changes
+
     L.control.layers(baseLayers, null).addTo(map);
     L.control.zoom({
         zoomInTitle: 'Zoom in',
@@ -56,33 +54,23 @@
         popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
     });
 
-    function compileList(){
+    function compileList() {
         // TODO： fake some more data
-        list.push([2,'West Lafayette, IN 47906',[40.4259,-86.9081],'','<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: In transit</p><p>Address: WEST LAFAYETTE, IN 47906</p>','/info']);
-        list.push([3,'Indianapolis International Airport',[39.7168593,-86.2977839],'','<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>','/info']);
+        list.push([2, 'West Lafayette, IN 47906', [40.4259, -86.9081], '', '<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: In transit</p><p>Address: WEST LAFAYETTE, IN 47906</p>', '/info']);
+        list.push([3, 'Indianapolis International Airport', [39.7168593, -86.2977839], '', '<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>', '/info']);
         console.log("now list looks like this");
         console.log(list);
 
         // Add location marker
         const infoHTML = "/info";
         var i;
-        for (i = 0; i < list.length; i++){
-            L.marker([list[i][2][0],list[i][2][1]],{icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[i][0] + ". " + list[i][1] + "</font></h3>"+ list[i][4]  + "<br><br>" + "<a  href='"+ infoHTML  + "'>" +"To Info Page"+"</a></div>");
+        for (i = 0; i < list.length; i++) {
+            L.marker([list[i][2][0], list[i][2][1]], {icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" + list[i][0] + ". " + list[i][1] + "</font></h3>" + list[i][4] + "<br><br>" + "<a  href='" + infoHTML + "' target=_blank>" + "To Info Page" + "</a></div>");
             console.log("marker " + i + " added");
         }
-
-<<<<<<< Updated upstream
-    // Add location marker
-    const infoHTML = "/info";
-    var i;
-    for (i = 0; i < list.length; i++){
-        L.marker([list[i][2][0],list[i][2][1]],{icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[i][0] + ". " + list[i][1] + "</font></h3>"+ list[i][4]  + "<br><br>" + "<a  href='"+ infoHTML  + "' target=_blank>" +"To Info Page"+"</a></div>");
-=======
         //now compile polyline
         compilePolyLine();
->>>>>>> Stashed changes
     }
-
     //popUp
     var popup = new L.popup();
     if(top != self){
@@ -109,19 +97,7 @@
         }).addTo(map);
         map.fitBounds(polyline.getBounds());
     }
-<<<<<<< Updated upstream
-    var polyline = L.polyline(latLags, {
-        "dashArray": [
-            10,
-            20
-        ],
-        "color": "#0000FF",
-        "weight": 8,
-    }).addTo(map);
-    map.fitBounds(polyline.getBounds());
-
-=======
->>>>>>> Stashed changes
+  
 </script>
 <!--google geocode implementaion-->
 <script>
