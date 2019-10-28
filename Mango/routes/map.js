@@ -15,8 +15,11 @@ router.get('/', (req, res) => {
     //obj.test();
     //console.log(obj.name);
     
-
-    console.log(obj.getName("wang1111@purdue.edu"));
+    async function printName(){
+        var name = await obj.getName("wang1111@purdue.edu");
+        console.log(name);
+    }
+    printName();
 
     //res.sendFile(path.join(__dirname, '../temp_front_files/sign_up.html'));
     res.sendFile(path.join(__dirname, '../map/html/map.html'));
