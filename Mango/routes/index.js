@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
-var tracking = require('../packageInfo/TrackApi.js');
+var trackingAPI = require('../packageInfo/TrackApi.js');
 var tool = require('../packageInfo/test.js');
 var path = require('path');
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
@@ -36,7 +36,8 @@ router.post('/track', async (req, res) => {
 	});
 
 	//console.log(packageInfo.TrackResponse.TrackInfo[0].$);
-	res.end(packageInfo);
+	//res.end(packageInfo);
+	res.json(packageInfo);
 });
 
 router.post('/', function(req, res, next){
