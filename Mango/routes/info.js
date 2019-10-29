@@ -19,9 +19,9 @@ function usps_callback(response) {
 
 /* GET users listing. */
 router.get('/',  async (req, res) => {
-	var response = {
-		"tracking number":req.query.tracking_num,
-	};
+	// var response = {
+	// 	"tracking number":req.query.tracking_num,
+	// };
 
 	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
 

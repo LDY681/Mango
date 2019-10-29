@@ -9,36 +9,34 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 var usps_username = '328NOCOM1209';		// DO NOT CHANGE THIS
 var tracking_number = '9500115483499149486703';
 
-var result = 'exxx';
+var packageInfo;
 
 function usps_callback(response) {
-	result = JSON.stringify(response);
-	//res.send(JSON.stringify(response));
-	//res.render('index', { title: 'www' });
+	packageInfo = response;
 }
 
-var myLogger = function (req, res, next) {
-	result = tool.showInfo();
-	next()
-};
 
-// router.use(myLogger)
 
 /* GET home page. */
 router.get('/',  function(req, res, next) {
-//router.get('/', ensureAuthenticated, function(req, res, next) {
-	// tracking.trackUSPS(usps_username, tracking_number, usps_callback)
-	// console.log(response.TrackResponse.TrackInfo[0].$);
-	//res.render('index', { title: result });
-
 	res.sendFile(path.join(__dirname, '../temp_front_files/index.html'))
 });
 
-router.get('/track', function(req, res){
+router.post('/track', async (req, res) => {
 /*    console.log("json received: \n");
     console.log(req.body);*/
     //使用tracking_Num，通过tracking api求出tracking Info，然后将trackingInfo填进res.json里
-    res.json({ "usps_username": "liudayu","tracking_number": "test123"});
+
+
+	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
+
+	// sleep 1 second, wait untail package data is fetched 
+	await new Promise (resolve => {
+		setTimeout(resolve, 1000)
+	});
+
+	//console.log(packageInfo.TrackResponse.TrackInfo[0].$);
+	res.end(packageInfo);
 });
 
 router.post('/', function(req, res, next){
