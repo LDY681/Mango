@@ -59,6 +59,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <script>
+    function toMap(){
+            var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
+            console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
+            window.location.href = "/map?&trackNum=" + trackID;
+    }
     function postTrackingNum() {
         var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
         console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
@@ -90,11 +95,11 @@
 				<textarea class="trackingNum" id="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
 			</div>
 			<button class="trackbtn" type="submit" id="track" onclick="postTrackingNum()">Track</button>
-			
 		</div>
 	</form>
+<a onclick="toMap()" style="text-decoration: none;color: white;"><button class="trackbtn">To Map</button></a>
+<a href="/users/logout" style="text-decoration: none;color: white;"><button class="trackbtn">Logout</button></a>
 
-	<a href="/users/logout">Logout</a>
 </body>
 </html>
 

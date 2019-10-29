@@ -25,7 +25,16 @@
 
 <!--Receive Data from database-->
 <script>
-    var data = { 'trackNum':'9361289707090745229015' };
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+    var trackNum = getUrlVars()["trackNum"];
+    console.log(trackNum + typeof(trackNum) );
+    var data = { 'trackNum':trackNum };
     function postTrackingNum() {
         fetch("/track",{
             method: 'POST',
@@ -126,10 +135,13 @@
 </script>
 <!--google geocode implementaion-->
 <script>
+
+  //TODO: 从localstorage查，查法
+  var json = JSON.parse(localStorage.getItem("trackInfo"));
+  var first = json.TrackResponse.TrackInfo[0].TrackDetail[0];
     var list= []; //address info list, global
     function initGeocode() {
         console.log("initGeocode");
-        //TODO: backend send data to here
         var info =
             {
                 "address": "Chicago Ohare Airport",
