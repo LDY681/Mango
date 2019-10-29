@@ -23,10 +23,10 @@ router.get('/',  function(req, res, next) {
 });
 
 router.post('/track', async (req, res) => {
-/*    console.log("json received: \n");
-    console.log(req.body);*/
+    console.log("json received: \n");
+    console.log(req.body);
     //使用tracking_Num，通过tracking api求出tracking Info，然后将trackingInfo填进res.json里
-
+    //var tracking_number = req.body.trackNum.toString();
 
 	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
 

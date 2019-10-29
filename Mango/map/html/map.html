@@ -25,9 +25,10 @@
 
 <!--Receive Data from database-->
 <script>
+    var data = { 'trackNum': 9361289707090745229015 };
     function postTrackingNum() {
         fetch("/track",{
-            method: 'GET',
+            method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
@@ -35,7 +36,8 @@
                 'Content-Type': 'application/json'
             },
             redirect: 'follow',
-            referrer: 'no-referrer'
+            referrer: 'no-referrer',
+            body: JSON.stringify(data)
     }).then(response =>response.text()).then(function(body){
             console.log("服务器数据返回了");
             console.log(body);
