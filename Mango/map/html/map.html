@@ -22,6 +22,29 @@
 <!--leaflet js-->
 <script src="http://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
 <script src="http://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
+
+<!--Receive Data from database-->
+<script>
+    function postTrackingNum() {
+        fetch("/track",{
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer'
+    }).then(response =>response.text()).then(function(body){
+            console.log("服务器数据返回了");
+            console.log(body);
+            localStorage.setItem('trackInfo', body);
+        });
+    }
+    console.log("运行postTrackingNum");
+    postTrackingNum();
+</script>
 <!--google map api-->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQkYx_TukGzO-NRhm-bGswFLA4woS8FgU&callback=initGeocode"></script>
 <!--leaflet map implementation-->

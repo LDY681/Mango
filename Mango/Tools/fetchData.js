@@ -8,7 +8,6 @@ class info {
 
     async getName (email) {
         var result;
-
         await User.findOne({ email: email })  // email found
         .then(user => { 
         // console.log(email);
@@ -20,8 +19,14 @@ class info {
 
         return result;
     }
-
 }
+var obj = new info(5);
+async function printName(){
+    var name = await obj.getName("wang1111@purdue.edu");
+    console.log("Name received is: ");
+    console.log(name);
+}
+
 
 module.exports = info;
 
