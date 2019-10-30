@@ -7,6 +7,29 @@ const passport = require("passport");
 const User = require("../models/User");
 
 
+const mongoose = require("mongoose");
+const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/login-test?retryWrites=true&w=majority";
+
+
+mongoose.set('useCreateIndex', true);
+mongoose.connect(db,{ useNewUrlParser: true,  useUnifiedTopology: true  });
+mongoose.connection.on("error", function (error) {
+  console.log("Fail to connect to mongoDB.", error);
+});
+mongoose.connection.on("open", function () {
+  console.log("Connected to mongoDB!");
+});
+
+
+
+
+
+
+
+
+
+
+
 // login
 router.get('/login', (req, res) => res.render("login"));
 
