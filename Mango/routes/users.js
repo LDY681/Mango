@@ -10,6 +10,16 @@ const User = require("../models/User");
 const mongoose = require("mongoose");
 const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/login-test?retryWrites=true&w=majority";
 
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'cs408.delivery@gmail.com',
+    pass: 'cs408track'
+  }
+});
+
 
 mongoose.set('useCreateIndex', true);
 mongoose.connect(db,{ useNewUrlParser: true,  useUnifiedTopology: true  });
@@ -19,13 +29,6 @@ mongoose.connection.on("error", function (error) {
 mongoose.connection.on("open", function () {
   console.log("Connected to mongoDB!");
 });
-
-
-
-
-
-
-
 
 
 
@@ -90,6 +93,21 @@ router.post('/register', (req, res) => {
                         email,
                         password
                     });
+
+                    var mailOptions = {
+                        from: 'cs408.delivery@gmail.com',
+                        to: email,
+                        subject: 'Register sucessfully',
+                        text: 'You have registered sucessfully.'
+                      };
+                      
+                      transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log('Email sent: ' + info.response);
+                        }
+                      });
 
                     // Hash password
                     bcrypt.genSalt(10, (err, salt) => 
