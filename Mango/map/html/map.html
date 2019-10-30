@@ -63,6 +63,11 @@
     function breakDownJSON(){
         var json = JSON.parse(localStorage.getItem("trackInfo"));
         var trackInfo = json.TrackResponse.TrackInfo[0].TrackDetail;
+        if (trackInfo === undefined){
+            alert("The Tracking Number " + json.TrackResponse.TrackInfo[0].$.ID + " cannot be found! Redirecting to home page!");
+            window.location.href = "/";
+            return;
+        }
         trackInfo.forEach(function(str) {
             var arr = str.split(",");
             let status, time, address;
