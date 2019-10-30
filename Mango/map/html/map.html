@@ -22,9 +22,12 @@
 <!--leaflet js-->
 <script src="http://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
 <script src="http://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
+<!--google map api-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQkYx_TukGzO-NRhm-bGswFLA4woS8FgU"></script>
 
-<!--Receive Data from database-->
+<!--Receive & Process Data from database + Google Geocoding -->
 <script>
+  //get url vars
     function getUrlVars() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -33,7 +36,7 @@
         return vars;
     }
     var trackNum = getUrlVars()["trackNum"];
-    console.log(trackNum + typeof(trackNum) );
+    console.log("给服务器发送的trackNum is: "+ trackNum);
     var data = { 'trackNum':trackNum };
     function postTrackingNum() {
         fetch("/track",{
@@ -47,17 +50,69 @@
             redirect: 'follow',
             referrer: 'no-referrer',
             body: JSON.stringify(data)
-    }).then(response =>response.text()).then(function(body){
+        }).then(response =>response.text()).then(function(body){
             console.log("服务器数据返回了");
             console.log(body);
             localStorage.setItem('trackInfo', body);
+            breakDownJSON();
         });
     }
-    console.log("运行postTrackingNum");
-    postTrackingNum();
+
+    //breakDown JSON received from server into a list
+    var breakDownList = [];
+    function breakDownJSON(){
+        var json = JSON.parse(localStorage.getItem("trackInfo"));
+        var trackInfo = json.TrackResponse.TrackInfo[0].TrackDetail;
+        trackInfo.forEach(function(str) {
+            var arr = str.split(",");
+            let status, time, address;
+            if (arr.length === 5){
+                 status = arr[0];
+                 time = arr[1].concat(arr[2]);
+                 address = arr[3].concat(arr[4]);
+                console.log("status: " + status + " time: "+ time + " address: "+ address);
+                breakDownList.push([status, time, address]);
+            }else if (arr.length === 6){
+                 status = arr[0];
+                 time = arr[1].concat(arr[2]).concat(arr[3]);
+                 address = arr[4].concat(arr[5]);
+                console.log("status: " + status + " time: "+ time + " address: "+ address);
+                breakDownList.push([status, time, address]);
+            }else{console.log("address is not available");}
+        });
+
+        console.log("breakDownList完成，长这样");
+        console.log(breakDownList);
+        console.log("开始geoCode");
+        geoCode();
+    }
+    var list= []; //new list with latlng instead of address
+    function geoCode() {
+        var geoCoder = new google.maps.Geocoder();
+        geocodeAddress(geoCoder, breakDownList);
+    }
+
+    function geocodeAddress(geoCoder, breakDownList) {
+        breakDownList.forEach(function(arr) {
+            var packageStatus = arr[0];
+            var time =  arr[1];
+            var address =  arr[2];
+            geoCoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    var lat = results[0].geometry.location.lat()+ Math.random()*0.002;
+                    var lng = results[0].geometry.location.lng()+ Math.random()*0.002;
+                    console.log(lat, lng);
+                    //                  0         1       2                3                                    4                        5
+                    list.push([list.length+1, address, [lat, lng],"<p>Status: "+ packageStatus +" </p>","<p>Time: "+ time +" </p>", "<p>Address: "+ address +" </p>"]);
+                    //call leaflet function after geocode is completed
+                    compileList();
+                } else {
+                    alert('Geocode returns error: ' + status);
+                }
+            });
+    });}
+  postTrackingNum();
 </script>
-<!--google map api-->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQkYx_TukGzO-NRhm-bGswFLA4woS8FgU&callback=initGeocode"></script>
 <!--leaflet map implementation-->
 <script>
     var Gaode = L.tileLayer.chinaProvider('Google.Normal.Map', {maxZoom: 18,minZoom: 5});
@@ -89,9 +144,6 @@
     });
 
     function compileList() {
-        // TODO： fake some more data
-        list.push([2, 'West Lafayette, IN 47906', [40.4259, -86.9081], '', '<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: In transit</p><p>Address: WEST LAFAYETTE, IN 47906</p>', '/info']);
-        list.push([3, 'Indianapolis International Airport', [39.7168593, -86.2977839], '', '<p></p><p>Date: June 5, 2019, 11:54 am</p><p>Status: Delivered at resident mailbox</p><p>Address: 7800 Col. H. Weir Cook Memorial Dr, Indianapolis, IN 46241</p>', '/info']);
         console.log("now list looks like this");
         console.log(list);
 
@@ -99,7 +151,7 @@
         const infoHTML = "/info";
         var i;
         for (i = 0; i < list.length; i++) {
-            L.marker([list[i][2][0], list[i][2][1]], {icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" + list[i][0] + ". " + list[i][1] + "</font></h3>" + list[i][4] + "<br><br>" + "<a  href='" + infoHTML + "' target=_blank>" + "To Info Page" + "</a></div>");
+            L.marker([list[i][2][0], list[i][2][1]], {icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h4><font color='#00a6ac'>" + list[i][3]  + "</font></h4>" + "<h4 style='color: #34ac00'> "+list[i][4] + "<h5>" + "<h4 style='color: #a9ac00'> "+list[i][5] + "<h5>" + "<a  href='" + infoHTML + "' target=_blank>" + "To Info Page" + "</a></div>");
             console.log("marker " + i + " added");
         }
         //now compile polyline
@@ -133,44 +185,7 @@
     }
   
 </script>
-<!--google geocode implementaion-->
-<script>
 
-  //TODO: 从localstorage查，查法
-  var json = JSON.parse(localStorage.getItem("trackInfo"));
-  var first = json.TrackResponse.TrackInfo[0].TrackDetail[0];
-    var list= []; //address info list, global
-    function initGeocode() {
-        console.log("initGeocode");
-        var info =
-            {
-                "address": "Chicago Ohare Airport",
-                "date": "October 28th, 2019",
-                "status": "Status: Departed USPS Facility"
-            };
-        var geoCoder = new google.maps.Geocoder();
-        geocodeAddress(geoCoder, info);
-    }
-
-    function geocodeAddress(geoCoder, info) {
-        var address = info.address;
-        var date = info.date;
-        var status = info.status;
-
-        geoCoder.geocode({'address': address}, function(results, status) {
-            if (status === 'OK') {
-                var lat = results[0].geometry.location.lat();
-                var lng = results[0].geometry.location.lng();
-                console.log(lat, lng);
-                list.push([list.length+1, address, [lat, lng],'','<p></p><p>Date: June 2, 2019, 8:01 am</p><p>Status: Departed USPS Facility</p><p>Address: WEST LAFAYETTE, IN 47906</p>','/info']);
-                //call leaflet function after geocode is completed
-                compileList();
-            } else {
-                alert('Geocode returns error: ' + status);
-            }
-        });
-    }
-</script>
 </body>
 </html>
 
