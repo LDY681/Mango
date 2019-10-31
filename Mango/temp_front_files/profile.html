@@ -22,9 +22,10 @@
 <!--&lt;!&ndash;                <input type = "submit" value = "Delete"><br>&ndash;&gt;-->
 <!--                <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>-->
 <!--            </form>-->
-            Add Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
-            <!--                <input type = "submit" value = "Add"><br>-->
-            <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Add</button></a><br>
+            <form action = "/profile/package" method = "GET">
+                Add Package: <input type = "text" name = "tracking_number">
+                <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Add</button></a><br>
+            </form>
 
             Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
             <!--                <input type = "submit" value = "Delete"><br>-->

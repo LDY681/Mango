@@ -41,43 +41,28 @@ router.get('/',  function(req, res, next) {
 
 
 router.get('/package', (req, res) =>{
-    const tracking_number = req.query.tracking_number;
-    // const {tracking_number} = req.body;
-    let errors = [];
+    var tracking_number = req.query.tracking_number;
 
-    // info validation
-    // check if values are blank
-    // TESTING !!!!!!!
-    // if (!tracking_number) {
-    //     errors.push({ msg: 'Please fill in tracking number' });
-    // }
+    // check database, see if there is a package has the same tracking number
+    Package.findOne({ tracking_number: tracking_number })  // check package
+        .then(package => {  
+            if(package) {   // there is a same tracking number
+                // package has been added
+                res.render('profile', {tracking_number:tracking_number});
+            } else {        // no same tracking number in database
+                const newPackage = new Package({
+                    tracking_number
+                });
 
-    //if no errors
-    if (errors.length > 0) {
-        res.render('profile', {tracking_number:tracking_number});
-    } else {
-
-        Package.findOne({ tracking_number: tracking_number })  // check package
-            .then(user => {
-                if(user) {
-                    // package has been added
-                    //errors.push({ msg: 'Package is already added' });
-                    res.render('profile', {tracking_number:tracking_number});
-                } else {
-                    const newPackage = new Package({
-                        tracking_number
-                    });
-
-                    //save data
-                    newPackage.save()
-                        .then(user => {
-                            req.flash("success_msg", "Your package are added.");
-                            res.redirect('/profile');
-                        })
-                        .catch(err => console.log(err));
-                }
-            });
-    }
+                //save data
+                newPackage.save()
+                    .then(user => {
+                        req.flash("success_msg", "Your package are added.");
+                        res.redirect('/profile');
+                    })
+                    .catch(err => console.log(err));
+            }
+    });
 });
 
 module.exports = router;
