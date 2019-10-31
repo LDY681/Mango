@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // User model
-const User = require("../models/User");
+const user_info = require("../models/user_info");
 
 
 const mongoose = require("mongoose");
@@ -75,7 +75,7 @@ router.post('/register', (req, res) => {
             password2
         });
     } else {
-        User.findOne({ email: email })  // check email
+        user_info.findOne({ email: email })  // check email
             .then(user => {
                 if(user) {
                     // email has been used
@@ -88,7 +88,7 @@ router.post('/register', (req, res) => {
                         password2
                     });
                 } else {
-                    const newUser = new User({
+                    const newUser = new user_info({
                         name,
                         email,
                         password
