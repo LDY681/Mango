@@ -8,7 +8,7 @@ const user_info = require("../models/user_info");
 
 
 const mongoose = require("mongoose");
-const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/login-test?retryWrites=true&w=majority";
+const db = "mongodb+srv://li2918:cs307@cluster0-kw4yb.mongodb.net/TrackingInformation?retryWrites=true&w=majority";
 
 var nodemailer = require('nodemailer');
 
@@ -45,6 +45,8 @@ router.post('/register', (req, res) => {
     let errors = [];
 
     // info validation
+
+    
     // check if values are blank
     // TESTING !!!!!!!
     if (!name) {
@@ -139,6 +141,7 @@ router.post('/login', (req, res, next) => {
       failureFlash: true
     })(req, res, next);
   });
+
 
 
   // Logout

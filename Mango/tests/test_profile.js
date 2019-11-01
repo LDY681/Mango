@@ -18,3 +18,11 @@ it('Test Profile 2: check for package page response', function(done)
         .end(done);
 });
 
+it('Test Profile 3: check for delete page response', function(done)
+{
+    request(server)
+        .get("/profile/delete")
+        .expect(200)
+        .end(done);
+});
+

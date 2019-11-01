@@ -63,6 +63,7 @@
     function breakDownJSON(){
         var json = JSON.parse(localStorage.getItem("trackInfo"));
         var trackInfo = json.TrackResponse.TrackInfo[0].TrackDetail;
+        var trackSummary = json.TrackResponse.TrackInfo[0].TrackSummary;
         if (trackInfo === undefined){
             alert("The Tracking Number " + json.TrackResponse.TrackInfo[0].$.ID + " cannot be found! Redirecting to home page!");
             window.location.href = "/";
@@ -92,6 +93,30 @@
             }else{console.log("address " + arr + " is not available");}
         });
 
+        trackSummary.forEach(function(str) {
+            var arr = str.split(" at the ");
+            console.log(arr);
+            var status = arr[0];
+            var rest = arr[1];
+            var arr2 = rest.split(" at ");
+            console.log(arr2);
+            var location = arr2[0];
+            location = location[0].toUpperCase() + location.slice(1);
+            var rest2 = arr2[1];
+            var arr3 = rest2.split(" in ");
+            console.log(arr3);
+            var timeAndDate = arr3[0];
+            var city = arr3[1].substring(0, arr3[1].length-1);
+            var arr4 = timeAndDate.split(" on ");
+            var time = arr4[0];
+            var date = arr4[1];
+            console.log("status: " + status);
+            console.log("location: " + location);
+            console.log("city: " + city);
+            console.log("time: " + time);
+            console.log("date: " + date);
+            breakDownList.unshift([status, date.concat(" ").concat(time), city]);
+        });
         console.log("breakDownList完成，长这样");
         console.log(breakDownList);
         console.log("开始geoCode");
