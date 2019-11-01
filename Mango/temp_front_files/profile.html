@@ -10,25 +10,18 @@
         <br><span class="tracking-number"> 333 </span>
 
         <div class="container d-flex justify-content-center h-200">
-<!--            <input class="box" type="text" placeholder="Tracking Number To Add" required/>-->
-<!--            <button class="trackbtn" type="submit" name="add_package" onclick="postTrackingNum()">Add Package</button><br>-->
-<!--            <input class="box" type="text" placeholder="Tracking Number To Delete" required/>-->
-<!--            <button class="trackbtn" type="submit" onclick="postTrackingNum()">Delete Package</button><br>-->
-<!--            <form action = "/profile" method = "GET">-->
-<!--                Add Package: <input type = "text" name = "add_package" placeholder="Tracking Number">-->
-<!--&lt;!&ndash;                <input type = "submit" value = "Add"><br>&ndash;&gt;-->
-<!--                <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Add</button></a><br>-->
-<!--                Delete Package: <input type = "text" name = "delete_package" placeholder="Tracking Number">-->
-<!--&lt;!&ndash;                <input type = "submit" value = "Delete"><br>&ndash;&gt;-->
-<!--                <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>-->
-<!--            </form>-->
-            Add Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
-            <!--                <input type = "submit" value = "Add"><br>-->
-            <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Add</button></a><br>
+            <form action = "/profile/package" method = "GET">
+                Add Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
+                <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Add</button></a><br>
+            </form>
 
-            Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
-            <!--                <input type = "submit" value = "Delete"><br>-->
-            <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>
+            <form action = "/profile/delete" method = "DELETE">
+                Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
+                <a href="/profile/delete" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>
+            </form>
+<!--            Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">-->
+<!--            &lt;!&ndash;                <input type = "submit" value = "Delete"><br>&ndash;&gt;-->
+<!--            <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>-->
         </div>
     </h3>
 

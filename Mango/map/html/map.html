@@ -4,10 +4,10 @@
   <title>LiveMap</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/5ac9a4c21164cd7b99a5/w3.css">
-  <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/ee4f73354921274b648d/all.css">
-  <link rel="stylesheet" href="http://lc-q48bubuw.cn-e1.lcfile.com/3f3571c72851519fdcd9/my-style.css">
-  <link href="http://lc-q48bubuw.cn-e1.lcfile.com/7e8cc9e6890199a21d38/leaflet.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://lc-q48bubuw.cn-e1.lcfile.com/5ac9a4c21164cd7b99a5/w3.css">
+  <link rel="stylesheet" href="https://lc-q48bubuw.cn-e1.lcfile.com/ee4f73354921274b648d/all.css">
+  <link rel="stylesheet" href="https://lc-q48bubuw.cn-e1.lcfile.com/3f3571c72851519fdcd9/my-style.css">
+  <link href="https://lc-q48bubuw.cn-e1.lcfile.com/7e8cc9e6890199a21d38/leaflet.css" rel="stylesheet" />
 </head>
 
 <body class="w3-animate-opacity">
@@ -20,8 +20,8 @@
 <!--jquery-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <!--leaflet js-->
-<script src="http://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
-<script src="http://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
+<script src="https://lc-q48bubuw.cn-e1.lcfile.com/5d492258d2aedb422f46/leaflet.js"></script>
+<script src="https://lc-q48bubuw.cn-e1.lcfile.com/bea0746b6a18af33e3c0/leaflet.ChineseTmsProviders.js"></script>
 <!--google map api-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQkYx_TukGzO-NRhm-bGswFLA4woS8FgU"></script>
 
@@ -70,8 +70,8 @@
         }
         trackInfo.forEach(function(str) {
             var arr = str.split(",");
-            let status, time, address;
-            if (arr.length === 5){
+                let status, time, address;
+                if (arr.length === 5){
                  status = arr[0];
                  time = arr[1].concat(arr[2]);
                  address = arr[3].concat(arr[4]);
@@ -83,7 +83,13 @@
                  address = arr[4].concat(arr[5]);
                 console.log("status: " + status + " time: "+ time + " address: "+ address);
                 breakDownList.push([status, time, address]);
-            }else{console.log("address is not available");}
+            }else if(arr.length === 7){
+                status = arr[0].concat(arr[1]);
+                time = arr[2].concat(arr[3]).concat(arr[4]);
+                address = arr[5].concat(arr[6]);
+                console.log("status: " + status + " time: "+ time + " address: "+ address);
+                breakDownList.push([status, time, address]);
+            }else{console.log("address " + arr + " is not available");}
         });
 
         console.log("breakDownList完成，长这样");
@@ -132,7 +138,7 @@
         zoomControl: false
     });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="/info">Back to Info Page</a> <<<'}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '>>> <a href="/">Back to Home Page</a> <<<'}).addTo(map);
 
     L.control.layers(baseLayers, null).addTo(map);
     L.control.zoom({
@@ -153,10 +159,10 @@
         console.log(list);
 
         // Add location marker
-        const infoHTML = "/info";
+        const infoHTML = "/";
         var i;
         for (i = 0; i < list.length; i++) {
-            L.marker([list[i][2][0], list[i][2][1]], {icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h4><font color='#00a6ac'>" + list[i][3]  + "</font></h4>" + "<h4 style='color: #34ac00'> "+list[i][4] + "<h5>" + "<h4 style='color: #a9ac00'> "+list[i][5] + "<h5>" + "<a  href='" + infoHTML + "' target=_blank>" + "To Info Page" + "</a></div>");
+            L.marker([list[i][2][0], list[i][2][1]], {icon: defaultMarker}).addTo(map).bindPopup("<div class='popupInfo'><h4><font color='#00a6ac'>" + list[i][3]  + "</font></h4>" + "<h4 style='color: #34ac00'> "+list[i][4] + "<h5>" + "<h4 style='color: #a9ac00'> "+list[i][5] + "<h5>" + "<a  href='" + infoHTML + "' target=_blank>" + "To Home Page" + "</a></div>");
             console.log("marker " + i + " added");
         }
         //now compile polyline

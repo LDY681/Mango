@@ -1,5 +1,5 @@
 // User model
-const User = require("../models/User");
+const user_info = require("../models/user_info");
 
 class info {
     constructor(name) {
@@ -8,7 +8,7 @@ class info {
 
     async getName (email) {
         var result;
-        await User.findOne({ email: email })  // email found
+        await user_info.findOne({ email: email })  // email found
         .then(user => { 
         // console.log(email);
         // console.log(user);

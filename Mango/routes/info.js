@@ -14,20 +14,17 @@ function usps_callback(response) {
 	packageInfo = response;
 }
 
+
 /* GET users listing. */
 router.get('/',  async (req, res) => {
-	var response = {
-		"tracking number":req.query.tracking_num,
-	};
+	// receive input tracking number from front end
 	tracking_number = req.query.tracking_num;
-	console.log("response");
-	console.log(response);
 
 	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
 
 	// sleep 1 second, wait untail package data is fetched
 	await new Promise (resolve => {
-		setTimeout(resolve, 1000)
+		setTimeout(resolve, 1000);
 	});
 	//printing tracking number
 	console.log();

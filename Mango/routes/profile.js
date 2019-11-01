@@ -18,7 +18,23 @@ mongoose.connection.on("open", function () {
 });
 
 
+// find data from database
+function find (name, cb) {
+    mongoose.connection.db.collection(name, function (err, collection) {
+       collection.find().toArray(cb);
+   });
+}
+
+
 router.get('/', function (req, res){
+    var tracking_numbers;
+
+    find('packages',  function (err, data) {
+        tracking_numbers = data;
+        console.dir(data);
+    });
+
+
     res.sendFile(path.join(__dirname, '../temp_front_files/profile.html'));
 });
 
@@ -41,43 +57,41 @@ router.get('/',  function(req, res, next) {
 
 
 router.get('/package', (req, res) =>{
-    const tracking_number = req.query.tracking_number;
-    // const {tracking_number} = req.body;
-    let errors = [];
+    var tracking_number = req.query.tracking_number;
+    var err_message = "";
 
-    // info validation
-    // check if values are blank
-    // TESTING !!!!!!!
-    // if (!tracking_number) {
-    //     errors.push({ msg: 'Please fill in tracking number' });
-    // }
+    // check database, see if there is a package has the same tracking number
+    Package.findOne({ tracking_number: tracking_number })  // check package
+        .then(package => {
+            if(package) {   // there is a same tracking number
+                // package has been added
+                //alert('The tracking number is already added. Please try another one!');
+                err_message = "The tracking number is already added. Please try another one!";
+                console.log('err_message: ', err_message);
+                res.redirect('/profile');
+                 // res.render('profile', {tracking_number:tracking_number});
+            } else {        // no same tracking number in database
+                const newPackage = new Package({
+                    tracking_number
+                });
 
-    //if no errors
-    if (errors.length > 0) {
-        res.render('profile', {tracking_number:tracking_number});
-    } else {
-
-        Package.findOne({ tracking_number: tracking_number })  // check package
-            .then(user => {
-                if(user) {
-                    // package has been added
-                    //errors.push({ msg: 'Package is already added' });
-                    res.render('profile', {tracking_number:tracking_number});
-                } else {
-                    const newPackage = new Package({
-                        tracking_number
-                    });
-
-                    //save data
-                    newPackage.save()
-                        .then(user => {
-                            req.flash("success_msg", "Your package are added.");
-                            res.redirect('/profile');
-                        })
-                        .catch(err => console.log(err));
-                }
-            });
-    }
+                //save data
+                newPackage.save()
+                    .then(user => {
+                        req.flash("success_msg", "Your package are added.");
+                        res.redirect('/profile');
+                    })
+                    .catch(err => console.log(err));
+            }
+    });
 });
+
+// router.delete('/delete/:id', function (req, res) {
+//     Package.findByIdAndRemove(req.params.id, function (err, packages) {
+//         if (err) return res.status(500).send("There was a problem deleting the package.");
+//         res.status(200).send("Package: "+ packages.tracking_number +" was deleted.");
+//     });
+// });
+
 
 module.exports = router;

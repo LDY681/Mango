@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 // load user model
-const User = require('../models/User.js');
+const user_info = require('../models/user_info');
 
 // using passport module
 module.exports = function(passport) {
@@ -11,7 +11,7 @@ module.exports = function(passport) {
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
             // Match user
             // see if there is a email in database that matchs current email
-            User.findOne({ email: email })
+            user_info.findOne({ email: email })
                 .then(user => { // return a user
                     if (!user) {   // if no user matchs
                         return done(null, false, { message: "That email is not registered." }); 
@@ -37,7 +37,7 @@ module.exports = function(passport) {
       });
     
       passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
+        user_info.findById(id, function(err, user) {
           done(err, user);
         });
       });

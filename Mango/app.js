@@ -62,6 +62,8 @@ app.use( (req, res, next) => {
 // EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs");
+app.set('views', __dirname + '/views');
+
 
 // routing
 app.use('/', require('./routes/index'));
@@ -70,6 +72,7 @@ app.use('/veri', require('./routes/veri'));
 app.use('/map', require('./routes/map'));
 app.use("/users", require("./routes/users"));
 app.use("/profile", require("./routes/profile"));
+app.use("/help", require("./routes/help"));
 
 
 //bodyParser
