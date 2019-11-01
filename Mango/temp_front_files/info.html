@@ -10,10 +10,10 @@
 	<!-- <script type="text/javascript" src="/routes/info.js"></script>
 	<script type="text/javascript" src="/routes/index.js"></script>
 	<script type="text/javascript" src="/packageInfo/TrackApi.js"></script> -->
-
+	<title>Mango Info Page</title>
 </head>
 <body>
-	<div id="tracked-numbers"> <!-- Container for all tracking numbers, includes available actions  -->
+	<div id="tracked-numbers" style="visibility: hidden"> <!-- Container for all tracking numbers, includes available actions  -->
 		<!-- hard-coded til we get test labels -->
 		<div class="track-bar-container"> <!-- Tracking bar with available actions underneath -->
 			<!-- .container-fluid -->
@@ -180,6 +180,7 @@
 			document.getElementById("Status").innerHTML = "The tracking number may be incorrect or the status update is not yet available. Please verify your tracking number and try again later.";
 			document.getElementById("TextExplanation").innerHTML = "Status Not Available";
 			document.getElementById("TextExplanation").style.color = "#e71921";
+			document.getElementById("tracked-numbers").style.visibility = "visible";
 			return;
 		}
 		if (!trackSummary[0].includes("Your item was delivered")) {
@@ -377,8 +378,11 @@
 
 		});
 
+		document.getElementById("tracked-numbers").style.visibility = "visible";
+
 		console.log("breakDownList完成，长这样");
 		console.log(breakDownList);
+
 	}
 	postTrackingNum();
 
