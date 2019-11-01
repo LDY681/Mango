@@ -93,7 +93,7 @@
 <form action="/info" method="GET">
 	<div class="center">
 		<div class="wrapper">
-			<textarea class="trackingNum" id="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
+			<textarea class="trackingNum" id="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID" minlength="20" maxlength="25"></textarea>
 		</div>
 		<button class="trackbtn" type="submit" id="track" onclick="postTrackingNum()">Track</button>
 	</div>

@@ -11,15 +11,34 @@
 
         <div class="container d-flex justify-content-center h-200">
             <form action = "/profile/package" method = "GET">
-                Add Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
+                Add Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number" minlength="20" maxlength="25">
                 <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Add</button></a><br>
             </form>
 
             <form action = "/profile/delete" method = "DELETE">
-                Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">
+                Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number" minlength="20" maxlength="25">
                 <a href="/profile/delete" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>
             </form>
-<!--            Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">-->
+
+<!--            <label>Password</label>-->
+<!--            <input name="password" class="form-control" type="password" required minlength="6" maxlength="30"-->
+<!--                   [(ngModel)]="registerUserData.password" #passwd="ngModel">-->
+<!--            <div *ngIf="passwd.invalid && (passwd.dirty || passwd.touched)" class="alert alert-danger">-->
+<!--                <div *ngIf="passwd.errors.required">Password is required.</div>-->
+<!--                <div *ngIf="passwd.errors.minlength">Password must be at least 6 characters long.</div>-->
+<!--                <div *ngIf="passwd.errors.maxlength">Password must not exceeds 30 characters long</div>-->
+<!--            </div>-->
+<!--            <label>First Name</label>-->
+<!--            <input name="firstname" class="form-control" type="text" required minlength="2"-->
+<!--                   maxlength="30" pattern="[a-zA-Z ]*" [(ngModel)]="registerUserData.firstName" #fname="ngModel">-->
+<!--            <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">-->
+<!--                <div *ngIf="fname.errors.required">First Name is required.</div>-->
+<!--                <div *ngIf="fname.errors.minlength">Name must be at least 2 characters long.</div>-->
+<!--                <div *ngIf="fname.errors.maxlength">Name must not exceeds 30 characters long</div>-->
+<!--                <div *ngIf="fname.errors.pattern">Name must be composed of pure letters</div>-->
+<!--            </div>-->
+
+            <!--            Delete Package: <input type = "text" name = "tracking_number" placeholder="Tracking Number">-->
 <!--            &lt;!&ndash;                <input type = "submit" value = "Delete"><br>&ndash;&gt;-->
 <!--            <a href="/profile/package" style="text-decoration: none;color: white;"><button class="trackbtn">Delete</button></a><br>-->
         </div>
