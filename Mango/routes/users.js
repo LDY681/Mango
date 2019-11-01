@@ -45,6 +45,8 @@ router.post('/register', (req, res) => {
     let errors = [];
 
     // info validation
+
+    
     // check if values are blank
     // TESTING !!!!!!!
     if (!name) {
@@ -139,6 +141,7 @@ router.post('/login', (req, res, next) => {
       failureFlash: true
     })(req, res, next);
   });
+
 
 
   // Logout

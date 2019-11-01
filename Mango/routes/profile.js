@@ -58,7 +58,8 @@ router.get('/delete', (req, res) =>{
             res.status(500).send(err)
         }
         else {
-            res.status(200).send(tracking_number + ' was deleted')
+            res.render("delete", {key: tracking_number});
+            //res.status(200).send(tracking_number + ' was deleted')
         }
     })
 });
