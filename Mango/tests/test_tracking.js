@@ -8,12 +8,6 @@ it('checking for null', function(){
     should.not.exist(id);
 });
 
-// describe('index', function(){
-//     it('should return right username', function(){
-//         assert.equal(server(), '328NOCOM1209')
-//     });
-// });
-
 it('checking for usps_username', function(){
     var usps_username = '328NOCOM1209';
     should.exist(usps_username);
