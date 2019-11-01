@@ -5,8 +5,7 @@ var tool = require('../packageInfo/test.js');
 var path = require('path');
 
 var usps_username = '328NOCOM1209';     // DO NOT CHANGE THIS
-var tracking_number = '9500115483499149486703';
-
+//var tracking_number = '9500115483499149486703';
 
 
 var packageInfo;
@@ -16,31 +15,25 @@ function usps_callback(response) {
 }
 
 
-
 /* GET users listing. */
 router.get('/',  async (req, res) => {
-	// var response = {
-	// 	tracking_number: req.query.tracking_num,
-	// };
-	var response = {
-		tracking_number: '1234566'
-	};
-	//tracking_number = req.query.tracking_num;
-	console.log(tracking_number);
+	// receive input tracking number from front end
+	tracking_number = req.query.tracking_num;
 
 	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
 
 	// sleep 1 second, wait untail package data is fetched 
 	await new Promise (resolve => {
 		setTimeout(resolve, 1000);
-		//console.log(packageInfo)
 	});
-	console.log(response.tracking_number);
 
-	
-	res.render('info', response);
-	//console.log(packageInfo.TrackResponse.TrackInfo[0].$);
-	//res.end(JSON.stringify(packageInfo));
+	var info = {
+		tracking_number: req.query.tracking_num,
+		tracking_status: packageInfo.TrackResponse.TrackInfo[0].TrackSummary,
+		tracking_detail: packageInfo.TrackResponse.TrackInfo[0].TrackDetail
+	};
+
+	res.render('info', info);
 	//res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
 });
 
