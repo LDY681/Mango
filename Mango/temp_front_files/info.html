@@ -162,12 +162,20 @@
 	function breakDownJSON(){
 		var json = JSON.parse(localStorage.getItem("trackInfo"));
 		var trackSummary = json.TrackResponse.TrackInfo[0].TrackSummary;
+		console.log(trackSummary[0]);
+		if (!trackSummary[0].includes("Your item was delivered")) {
+			document.getElementById("StrongStatus").style.color = "#336";
+			document.getElementById("StrongStatus").innerHTML = "In-Transit";
+			document.getElementById("StatusBar").className = "status_bar status_4";
+			document.getElementById("TextExplanation").style.color = "#336";
+			document.getElementById("TextExplanation").innerHTML = "In-Transit";
+
+		}
 		var trackInfo = json.TrackResponse.TrackInfo[0].TrackDetail;
 		if (trackInfo === undefined){
 			// alert("The Tracking Number " + json.TrackResponse.TrackInfo[0].$.ID + " cannot be found! Redirecting to homepage!");
 			// window.location.href = "/";
 			// return;
-			document.getElementById("TrackingID").innerHTML = trackingNum;
 			document.getElementById("StatusTime").remove();
 			document.getElementById("StatusCity").remove();
 			document.getElementById("ExpectedDelivery").remove();
@@ -184,11 +192,19 @@
 			var arr = str.split(",");
 			let status, time, address;
 			if (arr.length === 5){
-				status = arr[0];
-				time = arr[1] + "," + arr[2] + "," + arr[3];
-				address = arr[4];
-				console.log("status: " + status + " time: "+ time + " address: "+ address);
-				breakDownList.push([status, time, address]);
+				if (arr[0] == "Out for Delivery") {
+					status = arr[0];
+					time = arr[1] + "," + arr[2];
+					address = arr[3] + "," + arr[4];
+					console.log("status: " + status + " time: "+ time + " address: "+ address);
+					breakDownList.push([status, time, address]);
+				} else {
+					status = arr[0];
+					time = arr[1] + "," + arr[2] + "," + arr[3];
+					address = arr[4];
+					console.log("status: " + status + " time: "+ time + " address: "+ address);
+					breakDownList.push([status, time, address]);
+				}
 			}else if (arr.length === 6){
 				status = arr[0];
 				time = arr[1] + "," + arr[2] + "," + arr[3];
@@ -202,11 +218,20 @@
 				console.log("status: " + status + " time: "+ time + " address: "+ address);
 				breakDownList.push([status, time, address]);
 			}else if (arr.length === 4) {
-				status = arr[0];
-				time = arr[1] + "," + arr[2];
-				address = arr[3];
-				console.log("status: " + status + " time: "+ time + " address: "+ address);
-				breakDownList.push([status, time, address]);
+				if (arr[0] == "Pre-Shipment Info Sent to USPS") {
+					status = arr[0] + "," + arr[1];
+					time = arr[2] + "," + arr[3];
+					address = '';
+					console.log("status: " + status + " time: "+ time + " address: "+ address);
+					breakDownList.push([status, time, address]);
+				} else {
+					status = arr[0];
+					time = arr[1] + "," + arr[2];
+					address = arr[3];
+					console.log("status: " + status + " time: "+ time + " address: "+ address);
+					breakDownList.push([status, time, address]);
+				}
+
 			}else{
 				console.log("address is not available");
 			}
