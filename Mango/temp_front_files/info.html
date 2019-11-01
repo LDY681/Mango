@@ -197,7 +197,11 @@
 			if (arr.length === 5){
 				if (arr[0] == "Out for Delivery") {
 					status = arr[0];
-					time = arr[1] + "," + arr[2];
+					console.log("arr[1]: " + arr[1]);
+					console.log();
+					console.log("formatDate: " + formatDate(arr[1]));
+
+					time = formatDate(arr[1]) + "," + arr[2];
 					address = arr[3] + "," + arr[4];
 					console.log("status: " + status + " time: "+ time + " address: "+ address);
 					breakDownList.push([status, time, address]);
@@ -216,7 +220,7 @@
 				breakDownList.push([status, time, address]);
 			}else if (arr.length === 2) {
 				status = arr[0];
-				time = arr[1];
+				time = formatDate(arr[1]);
 				address = '';
 				console.log("status: " + status + " time: "+ time + " address: "+ address);
 				breakDownList.push([status, time, address]);
@@ -229,7 +233,7 @@
 					breakDownList.push([status, time, address]);
 				} else {
 					status = arr[0];
-					time = arr[1] + "," + arr[2];
+					time = formatDate(arr[1]) + "," + arr[2];
 					address = arr[3];
 					console.log("status: " + status + " time: "+ time + " address: "+ address);
 					breakDownList.push([status, time, address]);
@@ -241,18 +245,22 @@
 		});
 
 		trackSummary.forEach(function(str) {
-			var arr = str.split(" at ");
+			var arr = str.split(" at the ");
 			console.log(arr);
 			var status = arr[0];
-			var location = arr[1];
-			var arr2 = arr[2].split(" in ");
+			var rest = arr[1];
+			var arr2 = rest.split(" at ");
 			console.log(arr2);
-			var timeAndDate = arr2[0];
-			var city = arr2[1];
-			var arr3 = timeAndDate.split(" on ");
+			var location = arr2[0];
+			location = location[0].toUpperCase() + location.slice(1);
+			var rest2 = arr2[1];
+			var arr3 = rest2.split(" in ");
 			console.log(arr3);
-			var time = arr3[0];
-			var date = arr3[1];
+			var timeAndDate = arr3[0];
+			var city = arr3[1].substring(0, arr3[1].length-1);
+			var arr4 = timeAndDate.split(" on ");
+			var time = arr4[0];
+			var date = arr4[1];
 			console.log("status: " + status);
 			console.log("location: " + location);
 			console.log("city: " + city);
@@ -260,9 +268,50 @@
 			console.log("date: " + date);
 			//dynamically loading status
 			document.getElementById("StatusTime").innerHTML = date + " at " + time;
-			document.getElementById("Status").innerHTML = "Arrived at " + location;
+			if (!trackSummary[0].includes("Your item was delivered")) {
+				document.getElementById("Status").innerHTML = "Arrived at " + location;
+			} else {
+				if (trackSummary[0].includes("in or at")) {
+					document.getElementById("Status").innerHTML = "Delivered, In/At " + location;
+				} else {
+					document.getElementById("Status").innerHTML = "Delivered, At " + location;
+				}
+			}
 			document.getElementById("StatusCity").innerHTML = city;
 
+			var span = document.createElement("SPAN");
+			var strong = document.createElement("STRONG");
+			strong.innerHTML = date + ", " + time;
+			span.appendChild(strong);
+			var br = document.createElement("BR");
+			var span2 = document.createElement("SPAN");
+			if (!trackSummary[0].includes("Your item was delivered")) {
+				span2.innerHTML = "Arrived at " + location;
+			} else {
+				if (trackSummary[0].includes("in or at")) {
+					span2.innerHTML = "Delivered, In/At " + location;
+				} else {
+					span2.innerHTML = "Delivered, At " + location;
+				}
+			}
+			var br2 = document.createElement("BR");
+			var span3 = document.createElement("SPAN");
+			span3.innerHTML = city;
+			var br3 = document.createElement("BR");
+			var span4 = document.createElement("SPAN");
+			span4.innerHTML = str;
+			var br4 = document.createElement("BR");
+			var hr = document.createElement("HR");
+
+			document.getElementById("History").appendChild(span);
+			document.getElementById("History").appendChild(br);
+			document.getElementById("History").appendChild(span2);
+			document.getElementById("History").appendChild(br2);
+			document.getElementById("History").appendChild(span3);
+			document.getElementById("History").appendChild(br3);
+			document.getElementById("History").appendChild(span4);
+			document.getElementById("History").appendChild(br4);
+			document.getElementById("History").appendChild(hr);
 		});
 
 		//dynamically loading id and summary
@@ -291,10 +340,13 @@
 				"August", "September", "October",
 				"November", "December"
 			];
-
-			var day = date.getDate();
-			var monthIndex = date.getMonth();
-			var year = date.getFullYear();
+			console.log(date.split[0]);
+			var day = date.split("/")[1];
+			if (day.charAt(0) == '0') {
+				day = day.charAt(1);
+			}
+			var monthIndex = date.split("/")[0] - 1;
+			var year = date.split("/")[2];
 
 			return monthNames[monthIndex] + ' ' + day + ", " + year;
 		}
