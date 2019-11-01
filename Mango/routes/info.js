@@ -5,7 +5,7 @@ var tool = require('../packageInfo/test.js');
 var path = require('path');
 
 var usps_username = '328NOCOM1209';     // DO NOT CHANGE THIS
-//var tracking_number = '9500115483499149486703';
+var tracking_number = '';
 
 
 var packageInfo;
@@ -22,19 +22,21 @@ router.get('/',  async (req, res) => {
 
 	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
 
-	// sleep 1 second, wait untail package data is fetched 
+	// sleep 1 second, wait untail package data is fetched
 	await new Promise (resolve => {
 		setTimeout(resolve, 1000);
 	});
-
-	var info = {
-		tracking_number: req.query.tracking_num,
-		tracking_status: packageInfo.TrackResponse.TrackInfo[0].TrackSummary,
-		tracking_detail: packageInfo.TrackResponse.TrackInfo[0].TrackDetail
-	};
-
-	res.render('info', info);
-	//res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
+	//printing tracking number
+	// console.log();
+	// console.log("printing tracking id from info.js");
+	// console.log(packageInfo.TrackResponse.TrackInfo[0].$);
+	// console.log();
+	// console.log("printing packageinfo");
+	// console.log(JSON.stringify(packageInfo));
+	// console.log();
+	//printing tracking info and do not render info.html
+	// res.end(JSON.stringify(packageInfo));
+	res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
 });
 
 module.exports = router;
