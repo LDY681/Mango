@@ -47,23 +47,23 @@ router.post('/register', (req, res) => {
     // info validation
     // check if values are blank
     // TESTING !!!!!!!
-    if (!name) {
-        errors.push({ msg: 'Please fill in name' });
-    }
-    if (!email) {
-        errors.push({ msg: 'Please fill in email' });
-    }
-    if (!password) {
-        errors.push({ msg: 'Please fill in password' });
-    }
-    if (!password2) {
-        errors.push({ msg: 'Please fill in confirm password' });
-    }
+    // if (!name) {
+    //     errors.push({ msg: 'Please fill in name' });
+    // }
+    // if (!email) {
+    //     errors.push({ msg: 'Please fill in email' });
+    // }
+    // if (!password) {
+    //     errors.push({ msg: 'Please fill in password' });
+    // }
+    // if (!password2) {
+    //     errors.push({ msg: 'Please fill in confirm password' });
+    // }
 
-    // check if password match
-    if (password != password2) {
-        errors.push({ msg: 'Please enters same password' });
-    }
+    // // check if password match
+    // if (password != password2) {
+    //     errors.push({ msg: 'Please enters same password' });
+    // }
 
     // if no errors
     if (errors.length > 0) {
