@@ -27,13 +27,13 @@ router.get('/',  async (req, res) => {
 		setTimeout(resolve, 1000);
 	});
 	//printing tracking number
-	console.log();
-	console.log("printing tracking id from info.js");
-	console.log(packageInfo.TrackResponse.TrackInfo[0].$);
-	console.log();
-	console.log("printing packageinfo");
-	console.log(JSON.stringify(packageInfo));
-	console.log();
+	// console.log();
+	// console.log("printing tracking id from info.js");
+	// console.log(packageInfo.TrackResponse.TrackInfo[0].$);
+	// console.log();
+	// console.log("printing packageinfo");
+	// console.log(JSON.stringify(packageInfo));
+	// console.log();
 	//printing tracking info and do not render info.html
 	// res.end(JSON.stringify(packageInfo));
 	res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))

@@ -115,7 +115,7 @@
             console.log("city: " + city);
             console.log("time: " + time);
             console.log("date: " + date);
-            breakDownList.unshift([status, time, city]);
+            breakDownList.unshift([status, date.concat(" ").concat(time), city]);
         });
         console.log("breakDownList完成，长这样");
         console.log(breakDownList);
