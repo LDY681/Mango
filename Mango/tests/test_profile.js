@@ -14,7 +14,7 @@ it('Test Profile 2: check for package page response', function(done)
 {
     request(server)
         .get("/profile/package")
-        .expect(302)
+        .expect(200)
         .end(done);
 });
 
