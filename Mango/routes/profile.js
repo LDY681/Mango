@@ -21,8 +21,8 @@ mongoose.connection.on("open", function () {
 // find data from database
 function find (name, cb) {
     mongoose.connection.db.collection(name, function (err, collection) {
-       collection.find().toArray(cb);
-   });
+        collection.find().toArray(cb);
+    });
 }
 
 
@@ -54,6 +54,18 @@ router.get('/',  function(req, res, next) {
 //     res.render('profile',{data:data});
 // });
 
+router.get('/delete', (req, res) =>{
+    var tracking_number = req.query.tracking_number;
+    Package.deleteOne({tracking_number:tracking_number}, (err, package) =>{
+        if (err){
+            res.status(500).send(err)
+        }
+        else {
+            res.status(200).send('success')
+        }
+    })
+})
+
 
 
 router.get('/package', (req, res) =>{
@@ -69,7 +81,7 @@ router.get('/package', (req, res) =>{
                 err_message = "The tracking number is already added. Please try another one!";
                 console.log('err_message: ', err_message);
                 res.redirect('/profile');
-                 // res.render('profile', {tracking_number:tracking_number});
+                // res.render('profile', {tracking_number:tracking_number});
             } else {        // no same tracking number in database
                 const newPackage = new Package({
                     tracking_number
@@ -83,7 +95,7 @@ router.get('/package', (req, res) =>{
                     })
                     .catch(err => console.log(err));
             }
-    });
+        });
 });
 
 // router.delete('/delete/:id', function (req, res) {
