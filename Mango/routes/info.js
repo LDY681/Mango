@@ -20,19 +20,28 @@ function usps_callback(response) {
 /* GET users listing. */
 router.get('/',  async (req, res) => {
 	// var response = {
-	// 	"tracking number":req.query.tracking_num,
+	// 	tracking_number: req.query.tracking_num,
 	// };
+	var response = {
+		tracking_number: '1234566'
+	};
+	//tracking_number = req.query.tracking_num;
+	console.log(tracking_number);
 
 	trackingAPI.trackUSPS(usps_username, tracking_number, usps_callback);
 
 	// sleep 1 second, wait untail package data is fetched 
 	await new Promise (resolve => {
-		setTimeout(resolve, 1000)
+		setTimeout(resolve, 1000);
+		//console.log(packageInfo)
 	});
+	console.log(response.tracking_number);
 
+	
+	res.render('info', response);
 	//console.log(packageInfo.TrackResponse.TrackInfo[0].$);
 	//res.end(JSON.stringify(packageInfo));
-	res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
+	//res.sendFile(path.join(__dirname, '../temp_front_files/info.html'))
 });
 
 module.exports = router;
