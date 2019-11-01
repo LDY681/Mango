@@ -79,7 +79,8 @@ router.get('/package', (req, res) =>{
             //save data
             newPackage.save()
                 .then(user => {
-                    res.status(200).send(tracking_number + ' was added');
+                    //res.status(200).send(tracking_number + ' was added');
+                    res.render('add', {key: tracking_number});
                     //req.flash("success_msg", "Your package are added.");
                     passport.authenticate('local', {
                         //successRedirect: '/users/register',
