@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
+const passport = require("passport");
 
 const Package = require("../models/Package");
 
@@ -48,11 +49,7 @@ router.get('/',  function(req, res, next) {
     res.end(JSON.stringify(response));
 });
 
-//router.get('/test', (req, res) => res.render('profile'));
-// var data = {hobbies:['abcdff', 'sddfsd','dfsdfdfs']};
-// router.get('/package', function(req, res){
-//     res.render('profile',{data:data});
-// });
+
 
 router.get('/delete', (req, res) =>{
     var tracking_number = req.query.tracking_number;
@@ -61,49 +58,40 @@ router.get('/delete', (req, res) =>{
             res.status(500).send(err)
         }
         else {
-            res.status(200).send('success')
+            res.status(200).send(tracking_number + ' was deleted')
         }
     })
-})
-
-
+});
 
 router.get('/package', (req, res) =>{
     var tracking_number = req.query.tracking_number;
-    var err_message = "";
+    Package.findOne({tracking_number:tracking_number}, (package) =>{
+        if (package){
+            res.status(500).send(tracking_number + ' was already added');
+            res.redirect('/profile');
+        }
+        else {
+            const newPackage = new Package({
+                tracking_number
+            });
 
-    // check database, see if there is a package has the same tracking number
-    Package.findOne({ tracking_number: tracking_number })  // check package
-        .then(package => {
-            if(package) {   // there is a same tracking number
-                // package has been added
-                //alert('The tracking number is already added. Please try another one!');
-                err_message = "The tracking number is already added. Please try another one!";
-                console.log('err_message: ', err_message);
-                res.redirect('/profile');
-                // res.render('profile', {tracking_number:tracking_number});
-            } else {        // no same tracking number in database
-                const newPackage = new Package({
-                    tracking_number
-                });
-
-                //save data
-                newPackage.save()
-                    .then(user => {
-                        req.flash("success_msg", "Your package are added.");
-                        res.redirect('/profile');
-                    })
-                    .catch(err => console.log(err));
-            }
-        });
+            //save data
+            newPackage.save()
+                .then(user => {
+                    res.status(200).send(tracking_number + ' was added');
+                    //req.flash("success_msg", "Your package are added.");
+                    passport.authenticate('local', {
+                        //successRedirect: '/users/register',
+                        successRedirect: '/profile',
+                        failureRedirect: '/profile/package',
+                        failureFlash: true
+                    })(req, res, next);
+                })
+                .catch(err => console.log(err));
+        }
+    })
 });
 
-// router.delete('/delete/:id', function (req, res) {
-//     Package.findByIdAndRemove(req.params.id, function (err, packages) {
-//         if (err) return res.status(500).send("There was a problem deleting the package.");
-//         res.status(200).send("Package: "+ packages.tracking_number +" was deleted.");
-//     });
-// });
 
 
 module.exports = router;
