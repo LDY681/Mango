@@ -162,8 +162,8 @@
 	function breakDownJSON(){
 		var json = JSON.parse(localStorage.getItem("trackInfo"));
 		var trackSummary = json.TrackResponse.TrackInfo[0].TrackSummary;
-		var trackInfo = json.TrackResponse.TrackInfo[0].TrackDetail;
-		if (trackInfo === undefined){
+		var trackInfo;
+		if (trackSummary == "The Postal Service could not locate the tracking information for your request. Please verify your tracking number and try again later." || trackInfo === undefined){
 			// alert("The Tracking Number " + json.TrackResponse.TrackInfo[0].$.ID + " cannot be found! Redirecting to homepage!");
 			// window.location.href = "/";
 			// return;
@@ -179,7 +179,10 @@
 			document.getElementById("Status").innerHTML = "The tracking number may be incorrect or the status update is not yet available. Please verify your tracking number and try again later.";
 			document.getElementById("TextExplanation").innerHTML = "Status Not Available";
 			document.getElementById("TextExplanation").style.color = "#e71921";
+			return;
 		}
+		trackInfo = json.TrackResponse.TrackInfo[0].TrackDetail;
+
 		if (!trackSummary[0].includes("Your item was delivered")) {
 			document.getElementById("StrongStatus").style.color = "#336";
 			document.getElementById("StrongStatus").innerHTML = "In-Transit";
