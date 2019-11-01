@@ -57,46 +57,47 @@
 </style>
 <body>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-<script>
-    function toMap(){
-            var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
-            console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
-            window.location.href = "/map?&trackNum=" + trackID;
-    }
-    function postTrackingNum() {
-        var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
-        console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
-        var data = { 'trackNum': trackID };
-        console.log("json to be sent: " + JSON.stringify(data));
-        fetch("/track",{
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            body: JSON.stringify(data)
-        }).then(response =>response.text()).then(function(body){
-            //var trackInfo =  text ? JSON.parse(text) : {};
-            console.log(body);
-            localStorage.setItem('trackInfo', body);
-        });
-    }
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+	<script>
+	function toMap(){
+		var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
+		console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
+		window.location.href = "/map?&trackNum=" + trackID;
+	}
+	function postTrackingNum() {
+		console.log("\n\n=================================================\n\n");
+		var trackID = $("#trackingNum").val()+ "";  //make sure trackId is type string
+		console.log("trackingId is: " + trackID + " typeof is: " + typeof(trackID));
+		var data = { 'trackNum': trackID };
+		console.log("json to be sent: " + JSON.stringify(data));
+		fetch("/track",{
+			method: 'GET',
+			mode: 'cors',
+			cache: 'no-cache',
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			redirect: 'follow',
+			referrer: 'no-referrer',
+			body: JSON.stringify(data)
+		}).then(response =>response.text()).then(function(body){
+			//var trackInfo =  text ? JSON.parse(text) : {};
+			console.log(body);
+			localStorage.setItem('trackInfo', body);
+		});
+	}
 </script>
 
 
-	<form action="/info" method="GET">
-		<div class="center">
-			<div class="wrapper">
-				<textarea class="trackingNum" id="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
-			</div>
-			<button class="trackbtn" type="submit" id="track" onclick="postTrackingNum()">Track</button>
+<form action="/info" method="GET">
+	<div class="center">
+		<div class="wrapper">
+			<textarea class="trackingNum" id="trackingNum" type="text" name="tracking_num" placeholder="Please enter your tracking ID"></textarea>
 		</div>
-	</form>
+		<button class="trackbtn" type="submit" id="track" onclick="postTrackingNum()">Track</button>
+	</div>
+</form>
 <a onclick="toMap()" style="text-decoration: none;color: white;"><button class="trackbtn">To Map</button></a>
 <a href="/users/logout" style="text-decoration: none;color: white;"><button class="trackbtn">Logout</button></a>
 <a href="/profile" style="text-decoration: none;color: white;"><button class="trackbtn">Profile</button></a>
@@ -110,24 +111,24 @@
 <head>
 <style>
 .center {
-	text-align: center;
+text-align: center;
 }
 </style>
 <script>
-	function search(){
-		var id = document.getElementById("id").value;
-		id = 9500115483499149486703;
-		location.replace("http://127.0.0.1:3000/info?" + id);
-	}
+function search(){
+var id = document.getElementById("id").value;
+id = 9500115483499149486703;
+location.replace("http://127.0.0.1:3000/info?" + id);
+}
 </script>
 </head>
 <body>
-		<div class="center">
-			<div>
-				Tracking number: <input type="text" name="tracking_num" id="id">
-			</div>
-			<button id="search" label="Search" style={{width: "90px", height:"40px", margin: "10px"}} onClick="search()">Search</button>
-		</div>
+<div class="center">
+<div>
+Tracking number: <input type="text" name="tracking_num" id="id">
+</div>
+<button id="search" label="Search" style={{width: "90px", height:"40px", margin: "10px"}} onClick="search()">Search</button>
+</div>
 
 </body>
 </html> -->
