@@ -42,13 +42,18 @@ router.get('/',  function(req, res, next) {
 
 router.get('/package', (req, res) =>{
     var tracking_number = req.query.tracking_number;
+    var err_message = "";
 
     // check database, see if there is a package has the same tracking number
     Package.findOne({ tracking_number: tracking_number })  // check package
-        .then(package => {  
+        .then(package => {
             if(package) {   // there is a same tracking number
                 // package has been added
-                res.render('profile', {tracking_number:tracking_number});
+                //alert('The tracking number is already added. Please try another one!');
+                err_message = "The tracking number is already added. Please try another one!";
+                console.log('err_message: ', err_message);
+                res.redirect('/profile');
+                 // res.render('profile', {tracking_number:tracking_number});
             } else {        // no same tracking number in database
                 const newPackage = new Package({
                     tracking_number
@@ -64,5 +69,13 @@ router.get('/package', (req, res) =>{
             }
     });
 });
+
+// router.delete('/delete/:id', function (req, res) {
+//     Package.findByIdAndRemove(req.params.id, function (err, packages) {
+//         if (err) return res.status(500).send("There was a problem deleting the package.");
+//         res.status(200).send("Package: "+ packages.tracking_number +" was deleted.");
+//     });
+// });
+
 
 module.exports = router;
