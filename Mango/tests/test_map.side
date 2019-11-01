@@ -10,7 +10,7 @@
       "id": "72fc31bb-73a1-4692-b79b-5aab0d2d60e3",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -19,7 +19,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "a2493352-a09d-4d98-be8a-3e265bedb67c",
       "comment": "",
@@ -35,7 +35,7 @@
       "id": "5400bf51-b7f0-4acd-a9c5-d636811457af",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -44,7 +44,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "bf33814b-4c2a-448f-a8cc-eadfc7a87eed",
       "comment": "",
@@ -63,7 +63,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "500e2b0d-f8f2-4e0e-96bb-dc912339885e",
       "comment": "",
@@ -79,7 +79,7 @@
       "id": "5b19fec6-16c2-48e0-937c-602cb5adbcce",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -88,7 +88,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "5181341d-bad6-4d04-a362-d16086e1686e",
       "comment": "",
@@ -106,7 +106,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "e1023b6c-c470-4221-bc96-ddb5bdefde26",
       "comment": "",
@@ -125,7 +125,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "add3a9fd-40e8-407e-8f3d-c4142f832ee5",
       "comment": "",
@@ -141,7 +141,7 @@
       "id": "56c31a65-d9b2-4727-8aad-70dbf3c2f5b8",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -150,7 +150,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "a9062821-f91e-453d-97c2-8742771ab425",
       "comment": "",
@@ -169,12 +169,12 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "98392a66-8812-45e7-b50a-2d0a12f50cea",
       "comment": "",
       "command": "clickAt",
-      "target": "linkText=To Info Page",
+      "target": "linkText=To Home Page",
       "targets": [
         ["linkText=To Info Page", "linkText"],
         ["css=a:nth-child(8)", "css:finder"],
@@ -191,7 +191,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "808feba9-c6b5-4540-8ad6-5b7c22faef81",
       "comment": "",
@@ -207,7 +207,7 @@
       "id": "942ad040-95dd-4fbd-a77f-ecf5ee4822e5",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -216,7 +216,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "e4b4722e-0790-4b13-b3fa-ec40c5c13844",
       "comment": "",
@@ -234,7 +234,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "490509ea-371d-43e3-9c3a-c78cb938cf39",
       "comment": "",
@@ -253,7 +253,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "b77e872e-c28a-4c02-8159-02393d4df18a",
       "comment": "",
@@ -272,7 +272,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "fd29fa96-f248-43bd-8f97-109edcc7d3de",
       "comment": "",
@@ -288,7 +288,7 @@
       "id": "d615f389-4567-499f-a978-6d60ec7d0eaa",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -297,7 +297,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "17e7bdae-f4fc-4c66-b16e-c579df678425",
       "comment": "",
@@ -319,7 +319,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "4377dfb1-af68-4683-bde0-968f133af5c1",
       "comment": "",
@@ -335,7 +335,7 @@
       "id": "df9ac4a8-5637-4b8f-9cdf-4577d25de2e3",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -344,7 +344,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "f29c99d5-e414-4f70-9ae9-e5f40f4481d2",
       "comment": "",
@@ -366,7 +366,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "dd324dd1-99f7-4483-9bd3-35b44c66518b",
       "comment": "",
@@ -382,7 +382,7 @@
       "id": "11492a97-42d3-4e9b-9715-15ef7f214aa6",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/map",
+      "target": "http://localhost:3000/map?trackNum=9361289707090745229015",
       "targets": [],
       "value": ""
     }, {
@@ -391,12 +391,12 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "798ec625-bbc9-499b-ac74-e848a4283367",
       "comment": "",
       "command": "click",
-      "target": "linkText=Back to Info Page",
+      "target": "linkText=Back to Home Page",
       "targets": [
         ["linkText=Back to Info Page", "linkText"],
         ["css=.leaflet-control-attribution > a:nth-child(2)", "css:finder"],
@@ -413,7 +413,7 @@
       "command": "pause",
       "target": "",
       "targets": [],
-      "value": "1000"
+      "value": "3000"
     }, {
       "id": "0bdd6df7-f5aa-4d3a-ba1d-669185481201",
       "comment": "",
