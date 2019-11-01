@@ -18,7 +18,23 @@ mongoose.connection.on("open", function () {
 });
 
 
+// find data from database
+function find (name, cb) {
+    mongoose.connection.db.collection(name, function (err, collection) {
+       collection.find().toArray(cb);
+   });
+}
+
+
 router.get('/', function (req, res){
+    var tracking_numbers;
+
+    find('packages',  function (err, data) {
+        tracking_numbers = data;
+        console.dir(data);
+    });
+
+
     res.sendFile(path.join(__dirname, '../temp_front_files/profile.html'));
 });
 
