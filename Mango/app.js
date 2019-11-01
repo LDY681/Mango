@@ -72,6 +72,7 @@ app.use('/veri', require('./routes/veri'));
 app.use('/map', require('./routes/map'));
 app.use("/users", require("./routes/users"));
 app.use("/profile", require("./routes/profile"));
+app.use("/help", require("./routes/help"));
 
 
 //bodyParser
