@@ -13,7 +13,7 @@
 	<title>Mango Info Page</title>
 </head>
 <body>
-	<div id="tracked-numbers" style="visibility: hidden"> <!-- Container for all tracking numbers, includes available actions  -->
+	<div id="tracked-numbers"> <!-- Container for all tracking numbers, includes available actions  -->
 		<!-- hard-coded til we get test labels -->
 		<div class="track-bar-container"> <!-- Tracking bar with available actions underneath -->
 			<!-- .container-fluid -->
@@ -44,7 +44,6 @@
 									<strong id="StrongStatus">Delivered</strong>
 								</h2>
 								<div class="status_feed">
-									<!-- <p id = "StatusTime"> #StatusTime# </p> -->
 									<p class="important" id = "Status"> #Status# </p>
 									<p id = "StatusCity"> #StatusCity# </p>
 									<!-- Anchor links -->
@@ -169,14 +168,14 @@
 			// return;
 			console.log("INVALID ID");
 			document.getElementById("TrackingID").innerHTML = trackingNum;
-			document.getElementById("StatusTime").remove();
 			document.getElementById("StatusCity").remove();
 			document.getElementById("ExpectedDelivery").remove();
 			document.getElementById("ProductAdditionalInformation").remove();
 			document.getElementById("DeliveryStatus").style.width = "100%";
 			// document.getElementById("StrongStatus").style.color = "#e71921";
 			document.getElementById("StrongStatus").innerHTML = "Status Not Available";
-			document.getElementById("StatusBar").className = "status_bar status_0";
+			document.getElementById("StrongStatus").style.color = "black";
+			document.getElementById("StatusBar").className = "status_bar status_6";
 			document.getElementById("Status").innerHTML = "The tracking number may be incorrect or the status update is not yet available. Please verify your tracking number and try again later.";
 			document.getElementById("TextExplanation").innerHTML = "Status Not Available";
 			// document.getElementById("TextExplanation").style.color = "#e71921";
@@ -184,13 +183,13 @@
 			return;
 		}
 		if (!trackSummary[0].includes("Your item was delivered")) {
-			// document.getElementById("StrongStatus").style.color = "#336";
+			document.getElementById("StrongStatus").style.color = "black";
 			document.getElementById("StrongStatus").innerHTML = "In-Transit";
 			// document.getElementById("StatusBar").className = "status_bar status_4";
 			// document.getElementById("TextExplanation").style.color = "#336";
 			document.getElementById("TextExplanation").innerHTML = "In-Transit";
 		} else {
-			// document.getElementById("StrongStatus").style.color = "#218748";
+			document.getElementById("StrongStatus").style.color = "black";
 			// document.getElementById("StatusBar").className = "status_bar status_6";
 			// document.getElementById("TextExplanation").style.color = "#218748";
 		}
@@ -270,7 +269,7 @@
 			console.log("time: " + time);
 			console.log("date: " + date);
 			//dynamically loading status
-			document.getElementById("StatusTime").innerHTML = date + " at " + time;
+			// document.getElementById("StatusTime").innerHTML = date + " at " + time;
 			if (!trackSummary[0].includes("Your item was delivered")) {
 				document.getElementById("Status").innerHTML = "Arrived at " + location;
 			} else {
@@ -314,7 +313,7 @@
 			// document.getElementById("History").appendChild(br3);
 			document.getElementById("History").appendChild(span4);
 			// document.getElementById("History").appendChild(br4);
-			document.getElementById("History").appendChild(hr);
+			// document.getElementById("History").appendChild(hr);
 		});
 
 		//dynamically loading id and summary
@@ -375,7 +374,7 @@
 			// document.getElementById("History").appendChild(br2);
 			document.getElementById("History").appendChild(span3);
 			// document.getElementById("History").appendChild(br3);
-			document.getElementById("History").appendChild(hr);
+			// document.getElementById("History").appendChild(hr);
 
 		});
 
