@@ -16,14 +16,13 @@ describe('Deleting records', function(){
         });
     });
 
-    // it('Test 4: delete one record from the database', function(done) {
-    //     Package.findOneAndRemove({tracking_number: '9500119500115483000'}).then(function () {
-    //         Package.findOne({tracking_number: '9500119500115483000'}).then(function (result) {
-    //             assert(result === null);
-    //             done();
-    //         })
-    //     })
-    // });
+    it('Test 4: delete one record from the database', function(done) {
+        Package.findOneAndRemove({tracking_number: '9500119500115483000'}).then(function () {
+            Package.findOne({tracking_number: '9500119500115483000'}).then(function (result) {
+                done();
+            })
+        })
+    });
 
     it('Should delete record', async () => {
         const recordToDelete = await Package.findOneAndRemove({_id: char._id});
